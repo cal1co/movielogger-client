@@ -1,5 +1,5 @@
 import { useState } from 'React'
-import Search from './search'
+import Search from './Search'
 
 function Nav() {
 

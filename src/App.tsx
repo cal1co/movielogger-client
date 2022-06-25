@@ -2,14 +2,17 @@ import { useState } from 'react'
 import logo from './logo.svg'
 import './style/App.css'
 import Nav from './components/nav'
+import { HashRouter as Router } from 'react-router-dom'
+import Routers from './routers'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <Nav />
-      MOVIE DB SEARCH
+      <Router>
+        <Nav />
+        <Routers />
+      </Router>
     </div>
   )
 }
