@@ -11,17 +11,19 @@ function Home() {
     const [trendingData, setTrendingData] = useState(Object)
 
     useEffect(() => {
-        getPopularFilms()
-        getTopFilms()
-        getTrendingFilms()
-        console.log(URLS.POPULAR)
+        getHomePageFilmData()
     }, [loading])
 
-    const getPopularFilms = () => {
-        axios.get(URLS.POPULAR)
+    const getHomePageFilmData = async () => {
+        await getPopularFilms()
+        await getTopFilms()
+        await getTredingFilmsWeekly()
+        setLoading(false)
+    }
+    
+    const getPopularFilms = async () => {
+        await axios.get(URLS.POPULAR)
         .then((res) => {
-            console.log(res.data)
-            setLoading(false)
             setPopularData(res.data.results)
         })
         .catch((err) => {
@@ -29,11 +31,9 @@ function Home() {
         })
     }
 
-    const getTopFilms = () => {
-        axios.get(URLS.TOP_RATED)
+    const getTopFilms = async () => {
+        await axios.get(URLS.TOP_RATED)
         .then((res) => {
-            console.log(res.data)
-            setLoading(false)
             setTopData(res.data.results)
         })
         .catch((err) => {
@@ -41,11 +41,9 @@ function Home() {
         })
     }
 
-    const getTrendingFilms = () => {
-        axios.get(URLS.TRENDING)
+    const getTredingFilmsWeekly = async () => {
+        await axios.get(URLS.TRENDING)
         .then((res) => {
-            console.log(res.data)
-            setLoading(false)
             setTrendingData(res.data.results)
         })
         .catch((err) => {
@@ -53,26 +51,10 @@ function Home() {
         })
     }
 
-    const renderPopularResults = (input: Array<Object>) => {
+    const renderResults = (input: Array<Object>) => {
         return input.map((movie: any, idx: number) => {
             return <li key={movie.id}>
-                <p>MOVIE: {movie.original_title}</p>
-                <img src={URLS.POSTER + movie.poster_path}></img>
-            </li>
-        })
-    }
-    const renderTopResults = (input: Array<Object>) => {
-        return input.map((movie: any, idx: number) => {
-            return <li key={movie.id}>
-                <p>MOVIE: {movie.original_title}</p>
-                <img src={URLS.POSTER + movie.poster_path}></img>
-            </li>
-        })
-    }
-    const renderTrendingResults = (input: Array<Object>) => {
-        return input.map((movie: any, idx: number) => {
-            return <li key={movie.id}>
-                <p>MOVIE: {movie.original_title}</p>
+                <p>{movie.original_title}</p>
                 <img src={URLS.POSTER + movie.poster_path}></img>
             </li>
         })
@@ -89,19 +71,19 @@ function Home() {
                     <div className="popularResults">
                         TODAY'S TOP PICKS:
                         {
-                            renderPopularResults(popularData)
+                            renderResults(popularData)
                         }
                     </div>
                     <div className="popularResults">
                         MOST POPULAR FILMS:
                         {
-                            renderTopResults(topData)
+                            renderResults(topData)
                         }
                     </div>
                     <div className="trendingResults">
                         THIS WEEKS TRENDING FILMS:
                         {
-                            renderTrendingResults(trendingData)
+                            renderResults(trendingData)
                         }
                     </div>
                 </div>
