@@ -4,7 +4,6 @@ import axios from 'axios'
 
 
 function Home() {
-    
     const [loading, setLoading] = useState(true)
     const [popularData, setPopularData] = useState(Object)
     const [topData, setTopData] = useState(Object)
@@ -54,7 +53,7 @@ function Home() {
     const renderResults = (input: Array<Object>) => {
         return input.map((movie: any, idx: number) => {
             return <li key={movie.id}>
-                <p>{movie.original_title}</p>
+                <p>#{idx + 1} {movie.original_title}</p>
                 <img src={URLS.POSTER + movie.poster_path}></img>
             </li>
         })

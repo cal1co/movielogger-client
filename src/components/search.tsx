@@ -9,33 +9,20 @@ function Search() {
 
     const newQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
         setQuery(event.target.value)
-        console.log("EKHKABC???")
     }
-
-    const renderResults = (input: Array<Object>) => {
-        return input.map((movie: any, idx: number) => {
-            return <li key={movie.id}>
-                <p>MOVIE: {movie.original_title}</p>
-            </li>
-        })
-
-    }
-
 
     const search = () => {
         console.log('Searching for title:', query)
         console.log("SEARCH DEBUG", URLS.SEARCH)
-        // axios.get(URLS.SEARCH + query)
-        // .then((res) => {
-        //     console.log(res.data.results)
-        //     renderResults(res.data.results)
-        //     setSearched(true)
-        //     setResults(res.data.results)
-        // })
-        // .catch((err) => {
-        //     console.log('blah',URLS.SEARCH)
-        //     console.log(err)
-        // })
+        axios.get(URLS.SEARCH + query)
+        .then((res) => {
+            console.log(res.data.results)
+            setResults(res.data.results)
+        })
+        .catch((err) => {
+            console.log('blah',URLS.SEARCH)
+            console.log(err)
+        })
     }
 
     return (
@@ -47,6 +34,7 @@ function Search() {
         </div>
       </div>
     )
+    
 }
 
 export default Search

@@ -1,5 +1,5 @@
 import { useState } from 'React'
-import Search from './Search'
+import Search from './search'
 
 function Nav() {
 
@@ -9,6 +9,7 @@ function Nav() {
         <Search />
     </div>
   )
+
 }
 
 export default Nav
