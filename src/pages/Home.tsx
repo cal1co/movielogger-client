@@ -4,7 +4,7 @@ import URLS from '../api/movieApi'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 // import { HashLink } from 'react-router-hash-link';
-let url = 'https://api.watchmode.com/v1/title/movie-238/v1/regions/AU/sources?apiKey=m41SbAcsqhiThRroL97PRr3qpdOVz16h46CfVjhS'
+
 function Home() {
     const [loading, setLoading] = useState(true)
     const [popularData, setPopularData] = useState(Object)
