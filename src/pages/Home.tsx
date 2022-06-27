@@ -1,13 +1,16 @@
+import '../style/Home.css'
 import { useEffect, useState } from 'react'
 import URLS from '../api/movieApi'
 import axios from 'axios'
-
+import {Link} from 'react-router-dom'
+// import { HashLink } from 'react-router-hash-link';
 
 function Home() {
     const [loading, setLoading] = useState(true)
     const [popularData, setPopularData] = useState(Object)
     const [topData, setTopData] = useState(Object)
     const [trendingData, setTrendingData] = useState(Object)
+    const [scrollCount, setScrollCount] = useState(0)
 
     useEffect(() => {
         getHomePageFilmData()
@@ -23,6 +26,7 @@ function Home() {
     const getPopularFilms = async () => {
         await axios.get(URLS.POPULAR)
         .then((res) => {
+            console.log(res.data.results)
             setPopularData(res.data.results)
         })
         .catch((err) => {
@@ -50,13 +54,41 @@ function Home() {
         })
     }
 
-    const renderResults = (input: Array<Object>) => {
+    const renderResults = (input: Array<Object>, group:String) => {
         return input.map((movie: any, idx: number) => {
-            return <li key={movie.id}>
-                <p>#{idx + 1} {movie.original_title}</p>
+            return <div className="home-element" key={movie.id} id={`${group}-${idx+1}`}>
+            <li key={movie.id}>
                 <img src={URLS.POSTER + movie.poster_path}></img>
+                <p># {idx + 1} {movie.original_title}</p>
             </li>
+            </div>
         })
+    } 
+
+    const scrollGroup = (elem:string, right:boolean) => {
+        let target = document.getElementById(elem)
+        console.log(target)
+        if (target){
+            let scrollVal = 75 * (document.documentElement.clientWidth / 100)
+            console.log(scrollVal)
+            if (scrollCount === 4 && right){
+                target.scrollLeft = 0
+                let count = 0
+                setScrollCount(count)
+            } else {
+                if (right){
+                    target.scrollLeft += scrollVal
+                    let count = scrollCount + 1 
+                    setScrollCount(count)
+                } else {
+                    target.scrollLeft -= scrollVal
+                    if (scrollCount !== 0){
+                        let count = scrollCount - 1 
+                        setScrollCount(count)
+                    }
+                }
+            }
+        }
     }
 
     return (
@@ -66,24 +98,36 @@ function Home() {
                 ? 
                 <p>loading...(import loading animation)</p>
                 :
-                <div>
-                    <div className="popularResults">
-                        TODAY'S TOP PICKS:
-                        {
-                            renderResults(popularData)
-                        }
+                <div className="home-results">
+                    <div className="home-block">
+                            TODAY'S TOP PICKS:
+                        <div className="result-group" id='top-films'>
+                            {
+                                renderResults(popularData, 'top')
+                            }
+                        </div>
+                        <button onClick={() => scrollGroup('top-films', false)}>L</button>
+                        <button onClick={() => scrollGroup('top-films', true)}>R</button>
                     </div>
-                    <div className="popularResults">
-                        MOST POPULAR FILMS:
-                        {
-                            renderResults(topData)
-                        }
+                    <div className="home-block">
+                            MOST POPULAR FILMS:
+                        <div className="result-group" id="popular-films">
+                            {
+                                renderResults(topData, 'pop')
+                            }
+                        </div>
+                        <button onClick={() => scrollGroup('popular-films', false)}>L</button>
+                        <button onClick={() => scrollGroup('popular-films', true)}>R</button>
                     </div>
-                    <div className="trendingResults">
-                        THIS WEEKS TRENDING FILMS:
-                        {
-                            renderResults(trendingData)
-                        }
+                    <div className="home-block">
+                            THIS WEEKS TRENDING FILMS:
+                        <div className="result-group" id="trending-films">
+                            {
+                                renderResults(trendingData, 'trend')
+                            }
+                        </div>
+                        <button onClick={() => scrollGroup('trending-films', false)}>L</button>
+                        <button onClick={() => scrollGroup('trending-films', true)}>R</button>
                     </div>
                 </div>
             }

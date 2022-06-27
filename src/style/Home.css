@@ -1,0 +1,41 @@
+html {
+    scroll-behavior:smooth;
+}
+
+body{
+    background-color:#f7f8fc;
+}
+
+/* media scroller */
+.home-block{
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
+    width:95vw;
+    grid-auto-columns:100%;
+    overflow-x:hidden;
+}
+.home-results{
+}
+
+.result-group{
+    scroll-behavior:smooth;
+    overflow:scroll;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 0.25rem;
+    scroll-snap-type: x proximity;
+}
+
+
+.home-element  {
+    scroll-snap-align:start
+    /* overflow:hidden; */
+}
+.home-element > li {
+    list-style-type:none;
+}
+.home-element > li > img {
+    border-radius: .25rem;
+    width:20vw;
+}
