@@ -4,7 +4,7 @@ import URLS from '../api/movieApi'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 // import { HashLink } from 'react-router-hash-link';
-
+let url = 'https://api.watchmode.com/v1/title/movie-238/v1/regions/AU/sources?apiKey=m41SbAcsqhiThRroL97PRr3qpdOVz16h46CfVjhS'
 function Home() {
     const [loading, setLoading] = useState(true)
     const [popularData, setPopularData] = useState(Object)
@@ -26,17 +26,17 @@ function Home() {
     const getPopularFilms = async () => {
         await axios.get(URLS.POPULAR)
         .then((res) => {
-            console.log(res.data.results)
             setPopularData(res.data.results)
         })
         .catch((err) => {
             console.error(err)
         })
     }
-
+    
     const getTopFilms = async () => {
         await axios.get(URLS.TOP_RATED)
         .then((res) => {
+            console.log(res.data.results)
             setTopData(res.data.results)
         })
         .catch((err) => {
@@ -63,7 +63,8 @@ function Home() {
                     <div className="user-rate">
                         {movie.vote_average} rate
                     </div>
-                <p className="film-title">{movie.original_title}</p>
+                    <p className="film-title">{movie.original_title}</p>
+                    <button>+ Watch list</button>
                 </div>
             </li>
             </div>
