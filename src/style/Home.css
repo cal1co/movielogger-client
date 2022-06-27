@@ -1,24 +1,33 @@
+
+
 html {
     scroll-behavior:smooth;
+    color:white;
 }
 
 body{
-    background-color:#f7f8fc;
+    background-color:#000000;
+    font-family: 'Trebuchet MS', sans-serif;
 }
 
 /* media scroller */
 .home-block{
+    font-size:0.9rem;
     position:relative;
     left:50%;
     transform:translateX(-50%);
-    width:95vw;
+    width:100vw;
     grid-auto-columns:100%;
     overflow-x:hidden;
+    margin-bottom:5vh;
+    /* border-radius:2%; */
+    background-color:#111111
 }
 .home-results{
 }
 
 .result-group{
+    scrollbar-width:none;
     scroll-behavior:smooth;
     overflow:scroll;
     display: grid;
@@ -29,13 +38,33 @@ body{
 
 
 .home-element  {
-    scroll-snap-align:start
+    scroll-snap-align:start;
+    background-color:#1a1a1a;
+    margin-left:0.2rem;
+    border-radius:0.3rem;
+    width:20vw;
     /* overflow:hidden; */
 }
 .home-element > li {
     list-style-type:none;
 }
 .home-element > li > img {
-    border-radius: .25rem;
     width:20vw;
+    border-radius: .2rem;
+}
+
+.movie-info{
+    margin:0.5rem;
+}
+
+.film-title{
+    line-height:1.4em;
+    width:inherit;
+    height:2.8rem;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
 }

@@ -58,8 +58,13 @@ function Home() {
         return input.map((movie: any, idx: number) => {
             return <div className="home-element" key={movie.id} id={`${group}-${idx+1}`}>
             <li key={movie.id}>
-                <img src={URLS.POSTER + movie.poster_path}></img>
-                <p># {idx + 1} {movie.original_title}</p>
+                <img src={URLS.POSTER + movie.poster_path} />
+                <div className="movie-info">
+                    <div className="user-rate">
+                        {movie.vote_average} rate
+                    </div>
+                <p className="film-title">{movie.original_title}</p>
+                </div>
             </li>
             </div>
         })
@@ -67,7 +72,6 @@ function Home() {
 
     const scrollGroup = (elem:string, right:boolean) => {
         let target = document.getElementById(elem)
-        console.log(target)
         if (target){
             let scrollVal = 75 * (document.documentElement.clientWidth / 100)
             console.log(scrollVal)
@@ -82,6 +86,7 @@ function Home() {
                     setScrollCount(count)
                 } else {
                     target.scrollLeft -= scrollVal
+
                     if (scrollCount !== 0){
                         let count = scrollCount - 1 
                         setScrollCount(count)
