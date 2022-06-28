@@ -1,11 +1,12 @@
+import '../style/Nav.css'
 import { useState } from 'React'
-import Search from './search'
+import Search from './Search'
 
 function Nav() {
 
   return (
     <div className="Nav">
-        THIS IS THE NAV
+      HELLO?
         <Search />
     </div>
   )

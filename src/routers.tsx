@@ -8,7 +8,7 @@ function Routers (){
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path='/search/' element={<SearchResults />} />
+            <Route path='/search' element={<SearchResults />} />
         </Routes>
     )
 

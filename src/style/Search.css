@@ -1,0 +1,29 @@
+.search{
+    outline:none;
+    border-color:transparent;
+    min-height:3vh;
+    width:35vw;
+    border-radius:0.25rem; 
+}
+
+.search:focus{
+    /* border:20px; */
+    transition: all .2s ease-in;
+
+    border:2px solid slateblue;
+    /* box-shadow: 0 0 10px slateblue; */
+}
+
+.search-butt{
+    flex:1;
+    position:relative;
+    background:none;
+    border:none;
+    top:50%;
+}
+.magnify{
+    /* position:relative; */
+    cursor:pointer;
+    top:50%;
+    transform:translate(-150%, 30%)
+}

@@ -1,0 +1,17 @@
+.Nav{
+    /* margin-bottom:10vh; */
+    height:6vh;
+    position:sticky;
+    top:0;
+    z-index:999;
+    background:#111111;
+    box-shadow: #00000013 0 5px 10px;
+    /* display:inline-block; */
+}
+.Nav > * {
+    display:inline-block;
+    position:relative;
+    left:30%;
+    top:50%;
+    transform:translate(-50%, -50%)
+}
