@@ -11,7 +11,18 @@
 .Nav > * {
     display:inline-block;
     position:relative;
-    left:30%;
+    /* left:30%; */
     top:50%;
     transform:translate(-50%, -50%)
+}
+
+.search{
+    left:30%;
+}
+
+.go-home{
+    position:relative;
+    width:10vw;
+    left:100%;
+    transform:translateY(-25%)
 }

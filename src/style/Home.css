@@ -99,6 +99,39 @@ body{
 }
 
 
+/* ARROWS */
+.arrow{
+  height:8vh;
+  width:8vw;
+  position:fixed;
+  z-index:11;
+  background-color:rgba(0,0,0,0.5);
+  border:1px solid white;
+  border-radius:0.5em;
+  cursor:pointer;
+  top:50%;
+  transform:translateY(-50%)
+}
+.left{
+  border-left:none;
+  left:-1.5%;
+}
+.right{
+  border-right:none;
+  right:-1.5%;
+}
+.scroll-arrow{
+  fill:white;
+}
+
+.arrow:hover .scroll-arrow{
+  transition: all .15s ease-in;
+
+  fill:slateblue
+
+}
+
+
 /* LOADER */
 .lds-ellipsis {
     /* display: inline-block; */
