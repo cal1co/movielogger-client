@@ -11,6 +11,7 @@ function Home() {
     const [topData, setTopData] = useState(Object)
     const [trendingData, setTrendingData] = useState(Object)
     const [scrollCount, setScrollCount] = useState(0)
+    const [imgLoaded, setImgLoaded] = useState(Array<Number>)
 
     useEffect(() => {
         getHomePageFilmData()
@@ -54,11 +55,21 @@ function Home() {
         })
     }
 
+    const incLoad = (num:Number) => {
+        // let newArr = [...imgLoaded]
+        // newArr.push(num)
+        // setImgLoaded(newArr)
+        // // if (imgLoaded.length === 60){
+        // //     console.log('PAGE READY!!')
+        // // }
+        // console.log(newArr.length, num)
+    }
+
     const renderResults = (input: Array<Object>, group:String) => {
         return input.map((movie: any, idx: number) => {
             return <div className="home-element" key={movie.id} id={`${group}-${idx+1}`}>
             <li key={movie.id}>
-                <img src={URLS.POSTER + movie.poster_path} />
+                <img src={URLS.POSTER + movie.poster_path} onLoad={() => incLoad(movie.id)}/>
                 <div className="movie-info">
                     <div className="user-rate">
                         {movie.vote_average} rate
@@ -72,6 +83,7 @@ function Home() {
     } 
 
     const scrollGroup = (elem:string, right:boolean) => {
+        console.log(imgLoaded)
         let target = document.getElementById(elem)
         if (target){
             let scrollVal = 75 * (document.documentElement.clientWidth / 100)
@@ -97,16 +109,24 @@ function Home() {
         }
     }
 
-    return (
+    return ( 
+        // TODO: REFACTOR CODE TO COUNT LOADING OF EACH IMAGE. ADD LOADING SPINNER TO EACH BLOCK AND ONLY SHOW WHEN ALL IMAGES ARE READY
+        // TODO: ADD A FADE IN EFFECT WHEN FINISHED LOADING
+        // TODO: LINK TO A PAGE WITH MORE INFO ABOUT THE MOVIE
+        // TODO: ALLOW USERS TO SEARCH FOR A FILM 
+        // TODO: GET STARTED ON USERS AND BACKEND.
         <div className="home">
             {
                 loading 
                 ? 
-                <p>loading...(import loading animation)</p>
+                // <p>loading...(import loading animation)</p>
+                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                 :
                 <div className="home-results">
                     <div className="home-block">
-                            TODAY'S TOP PICKS:
+                            <h1 className="title-text">
+                                TODAY'S TOP PICKS ▶ 
+                            </h1>
                         <div className="result-group" id='top-films'>
                             {
                                 renderResults(popularData, 'top')
@@ -116,7 +136,9 @@ function Home() {
                         <button onClick={() => scrollGroup('top-films', true)}>R</button>
                     </div>
                     <div className="home-block">
-                            MOST POPULAR FILMS:
+                        <h1 className="title-text">
+                            MOST POPULAR FILMS ▶ 
+                        </h1>
                         <div className="result-group" id="popular-films">
                             {
                                 renderResults(topData, 'pop')
@@ -126,7 +148,9 @@ function Home() {
                         <button onClick={() => scrollGroup('popular-films', true)}>R</button>
                     </div>
                     <div className="home-block">
-                            THIS WEEKS TRENDING FILMS:
+                        <h1 className="title-text">
+                            THIS WEEKS TRENDING FILMS ▶ 
+                        </h1>
                         <div className="result-group" id="trending-films">
                             {
                                 renderResults(trendingData, 'trend')
