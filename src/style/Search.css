@@ -30,3 +30,45 @@
     top:50%;
     transform:translate(-150%, 30%)
 }
+
+.search-img{
+    max-width:80px;
+    min-width:80px;
+}
+
+.search-element{
+    background-color:#1a1a1a;
+    margin-left:0.2rem;
+    border-radius:0.3rem;
+    /* width:fit-content; */
+    margin-bottom:2vh;
+    display:grid;
+    grid-template-columns: 100px 5fr;
+    /* grid-template-rows: repeat(2, 0.5fr); */
+    grid-template-areas:
+    "poster-side movie-info"
+}
+.poster-side{ grid-area: poster-side; }
+.movie-info{ grid-area: movie-info; }
+
+.result-block{
+    background-color:#111111;
+    margin-bottom:5vh;
+}
+.movie-info{
+    /* float:right; */
+}
+.poster-side{
+    width:fit-content;
+}
+.overview{
+    line-height:1.4em;
+    width:inherit;
+    height:2.8rem;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    white-space: normal;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}

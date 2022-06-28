@@ -37,17 +37,18 @@ function searchResults(){
 
     const renderResults = (input: Array<Object>) => {
         return input.map((movie: any, idx: number) => {
-            return <div className="home-element" key={movie.id} id={`${idx+1}`}>
-            <li key={movie.id}>
-                <img src={URLS.POSTER + movie.poster_path}/>
+            return <div className="search-element" key={movie.id} id={`${idx+1}`}>
+                <div className="poster-side" key={movie.id}>
+                    <img className="search-img" src={URLS.POSTER + movie.poster_path}/>
+                </div>
                 <div className="movie-info">
+                    <p className="film-title">{movie.original_title} ({movie.release_date})</p>
                     <div className="user-rate">
                         {movie.vote_average} rate
                     </div>
-                    <p className="film-title">{movie.original_title}</p>
                     <button>+ Watch list</button>
+                    <p className="overview">{movie.overview}</p>
                 </div>
-            </li>
             </div>
         })
     } 
@@ -62,7 +63,7 @@ function searchResults(){
                 ?
                 <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                 :
-                <div>
+                <div className="result-block">
                     {
                         renderResults(results)
                     }

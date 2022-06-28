@@ -37,7 +37,6 @@ function Home() {
     const getTopFilms = async () => {
         await axios.get(URLS.TOP_RATED)
         .then((res) => {
-            console.log(res.data.results)
             setTopData(res.data.results)
         })
         .catch((err) => {
@@ -55,21 +54,11 @@ function Home() {
         })
     }
 
-    const incLoad = (num:Number) => {
-        // let newArr = [...imgLoaded]
-        // newArr.push(num)
-        // setImgLoaded(newArr)
-        // // if (imgLoaded.length === 60){
-        // //     console.log('PAGE READY!!')
-        // // }
-        // console.log(newArr.length, num)
-    }
-
     const renderResults = (input: Array<Object>, group:String) => {
         return input.map((movie: any, idx: number) => {
             return <div className="home-element" key={movie.id} id={`${group}-${idx+1}`}>
             <li key={movie.id}>
-                <img src={URLS.POSTER + movie.poster_path} onLoad={() => incLoad(movie.id)}/>
+                <img className="res-img" src={URLS.POSTER + movie.poster_path}/>
                 <div className="movie-info">
                     <div className="user-rate">
                         {movie.vote_average} rate
@@ -83,11 +72,9 @@ function Home() {
     } 
 
     const scrollGroup = (elem:string, right:boolean) => {
-        console.log(imgLoaded)
         let target = document.getElementById(elem)
         if (target){
-            let scrollVal = 75 * (document.documentElement.clientWidth / 100)
-            console.log(scrollVal)
+            let scrollVal = (document.documentElement.clientWidth)
             if (scrollCount === 4 && right){
                 target.scrollLeft = 0
                 let count = 0
@@ -123,6 +110,8 @@ function Home() {
                 <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                 :
                 <div className="home-results">
+                    <div className="home-block"></div>
+
                     <div className="home-block">
                             <h1 className="title-text">
                                 TODAY'S TOP PICKS ▶ 
