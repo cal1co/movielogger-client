@@ -6,15 +6,24 @@ import URLS from '../api/movieApi'
 function searchResults(){
     const [loading, setLoading] = useState(true)
     const [results, setResults] = useState({})
+    const [query, setQuery] = useState('')
 
     const location = useLocation()
     const { searchQuery } = location.state
 
     useEffect(() => {
-        getSearchData()
-    }, [loading])
+        console.log("QUERY HERE", searchQuery)
+        execSearch()
+        // return () => console.log("IM OUT")
+    }, [searchQuery])
 
+    const execSearch = async () => {
+        setLoading(true)
+        await getSearchData()
+    }
+    execSearch
     const getSearchData = async () => {
+        // setLoading(true)
         await axios.get(URLS.SEARCH + searchQuery)
             .then((res) => {
                 console.log(res.data.results)
@@ -26,6 +35,22 @@ function searchResults(){
             })
     }
 
+    const renderResults = (input: Array<Object>) => {
+        return input.map((movie: any, idx: number) => {
+            return <div className="home-element" key={movie.id} id={`${idx+1}`}>
+            <li key={movie.id}>
+                <img src={URLS.POSTER + movie.poster_path}/>
+                <div className="movie-info">
+                    <div className="user-rate">
+                        {movie.vote_average} rate
+                    </div>
+                    <p className="film-title">{movie.original_title}</p>
+                    <button>+ Watch list</button>
+                </div>
+            </li>
+            </div>
+        })
+    } 
 
 
     return (
@@ -38,7 +63,9 @@ function searchResults(){
                 <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                 :
                 <div>
-                    query loaded 
+                    {
+                        renderResults(results)
+                    }
                 </div>
             }
         </div>
