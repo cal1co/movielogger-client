@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
 import Home from './pages/Home'
+import Title from './pages/Title'
 import SearchResults from './pages/SearchResults'
 
 function Routers (){
@@ -9,6 +10,7 @@ function Routers (){
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path='/search' element={<SearchResults />} />
+            <Route path='/title' element={<Title/>} />
         </Routes>
     )
 

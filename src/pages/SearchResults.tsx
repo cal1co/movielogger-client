@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import URLS from '../api/movieApi'
@@ -40,14 +40,17 @@ function searchResults(){
             return <div className="search-element" key={movie.id} id={`${idx+1}`}>
                 <div className="poster-side" key={movie.id}>
                     <img className="search-img" src={URLS.POSTER + movie.poster_path}/>
-                </div>
-                <div className="movie-info">
-                    <p className="film-title">{movie.original_title} ({movie.release_date})</p>
                     <div className="user-rate">
                         {movie.vote_average} rate
                     </div>
-                    <button>+ Watch list</button>
+                </div>
+                <div className="movie-info">
+                    <Link to={`/title?id=${movie.id}`} state={{movieInfo: movie}}>
+                    <p className="film-title">{movie.original_title} ({movie.release_date})</p>
+                    </Link>
+                        
                     <p className="overview">{movie.overview}</p>
+                    <button>+ Watch list</button>
                 </div>
             </div>
         })

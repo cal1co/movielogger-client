@@ -63,7 +63,7 @@
 }
 .overview{
     line-height:1.4em;
-    width:inherit;
+    width:80vw;
     height:2.8rem;
     -webkit-line-clamp: 2;
     display: -webkit-box;
@@ -71,4 +71,9 @@
     white-space: normal;
     overflow:hidden;
     text-overflow:ellipsis;
+    margin:0;
+}
+.film-title{
+    margin:0;
+    height:fit-content;
 }
