@@ -119,8 +119,8 @@ function Title() {
                                         fetchedServices
                                         ?
                                         <div className="platforms">
+                                                <div>Stream:</div>
                                             <div className="streaming-platforms">
-                                                Stream:
                                                 {
                                                     services.flatrate
                                                     ?
@@ -130,8 +130,8 @@ function Title() {
                                                     
                                                 }
                                             </div>
+                                                <div>Rent:</div>
                                             <div className="purchase-platforms">
-                                                Rent:
                                                 {
                                                     services.rent
                                                     ?

@@ -22,7 +22,16 @@
 
 .go-home{
     position:relative;
-    width:10vw;
+    width:fit-content;
     left:100%;
-    transform:translateY(-25%)
+    transform:translate(-25%, -25%);
+    background:none;
+    border:none;
+    color:white;
+    font-weight:bolder;
+    font-size:larger;
+    background: -webkit-linear-gradient(#dddd, slateblue);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+    cursor:pointer;
 }
