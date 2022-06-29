@@ -1,14 +1,30 @@
+.title-block{
+    height:fit-content;
+    display:grid;
+    grid-template-rows:10vh 40vh;
+    grid-template-columns: 40vw;
+    /* grid-template-rows: repeat(2, 0.5fr); */
+    grid-template-areas:
+    "title title"
+    "poster-side movie-info"
+}
+.title-img{ grid-area: poster-side; }
+.filmData-info{ grid-area: movie-info;}
+
+
 .backdrop{
+    position:fixed;
     width:100vw;
     min-width: 540px;
-    filter:blur(0.0rem) invert(20%) sepia(96%) saturate(2717%) hue-rotate(219deg) brightness(84%) contrast(97%)
+    filter:blur(0.0rem) invert(20%) sepia(96%) saturate(2717%) hue-rotate(219deg) brightness(75%) contrast(97%)
 }
 
 .title-img{
-    position:absolute;
+    position:relative;
     z-index:99999999; 
-    top:15%;
-    left:8vw;
+    /* top:50%; */
+    left:50%;
+    transform:translateX(-50%);
     width:25vw;
     min-width:135px;
     height:auto;
@@ -23,4 +39,37 @@
     left:8vw;
     font-weight:bolder;
     font-size:larger;
+    text-decoration:underline;
+}
+
+.filmData-info{
+    z-index:1;
+    /* top:15%; */
+    /* left: 20%; */
+}
+.title-overview {
+    position:relative;
+    width:55vw;
+    height:fit-content;
+    text-overflow:none;
+    font-size:1rem
+}
+.synopsis{
+    font-weight:bolder;
+    margin:0;
+}
+
+.service-platform{
+    position:relative;
+    transition: all .2s ease-in;
+    height:30px;
+}
+.service-platform:hover{
+    top:-10%;
+    cursor:pointer;
+}
+
+.platforms > div > *{
+    display:inline-block;
+    padding-left:10px;
 }
