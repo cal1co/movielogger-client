@@ -10,12 +10,14 @@ function Search() {
     const [searchedQuery, setSearchedQuery] = useState("")
 
     const newQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setQuery(encodeURIComponent(event.target.value))
         event.preventDefault()
+        setQuery(encodeURIComponent(event.target.value))
     }
 
     return (
       <div className="Search">
+        <form >
+
             <input className="search" placeholder={"Search for a title"} type={"text"} onChange={newQuery}></input>
             <Link to={`/search?query=${encodeURIComponent(query)}`} state={{searchQuery: decodeURIComponent(query)}}>
                 <button type="submit" className="search-butt">
@@ -23,6 +25,7 @@ function Search() {
                 </button> 
 
             </Link>
+        </form>
       </div>
     )
     

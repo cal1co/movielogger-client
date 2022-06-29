@@ -1,0 +1,26 @@
+.backdrop{
+    width:100vw;
+    min-width: 540px;
+    filter:blur(0.0rem) invert(20%) sepia(96%) saturate(2717%) hue-rotate(219deg) brightness(84%) contrast(97%)
+}
+
+.title-img{
+    position:absolute;
+    z-index:99999999; 
+    top:15%;
+    left:8vw;
+    width:25vw;
+    min-width:135px;
+    height:auto;
+    border-radius:0.25rem;
+    border:2px solid white;
+}
+
+.title-name{
+    position:absolute;
+    z-index:1;
+    top:8%;
+    left:8vw;
+    font-weight:bolder;
+    font-size:larger;
+}

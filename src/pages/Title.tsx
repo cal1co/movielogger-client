@@ -1,3 +1,4 @@
+import '../style/Title.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -57,18 +58,17 @@ function Title() {
                         <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                         <div>Loading resources...</div>
                     </div>
+                    
+                    <div className="search-element">
+                    </div>
                     <div className="search-element" key={filmData.id} style={{display: backdropLoaded ? 'inline-block' : 'none'}}>
+                        <img className="title-img" src={URLS.POSTER + filmData.poster_path}/>
                         <img className="backdrop" src={URLS.BACKDROP + filmData.backdrop_path} onLoad={() => setBackdropLoaded(true)}/>
-                        <div className="poster-side" key={filmData.id}>
-                        <img className="search-img" src={URLS.POSTER + filmData.poster_path}/>
                         <div className="user-rate">
                             {filmData.vote_average} rate
                         </div>
-                        </div>
                         <div className="filmData-info">
-                            <Link to={`/title?id=${filmData.id}`}>
-                            <p className="film-title">{filmData.original_title} ({filmData.release_date})</p>
-                            </Link>
+                            <p className="title-name">{filmData.original_title}</p>
                                 
                             <p className="overview">{filmData.overview}</p>
                             <button>+ Watch list</button>

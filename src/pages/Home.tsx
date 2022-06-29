@@ -63,7 +63,9 @@ function Home() {
                     <div className="user-rate">
                         {movie.vote_average} rate
                     </div>
+                    <Link to={`/title?id=${movie.id}`} state={{movieInfo: movie}}>
                     <p className="film-title">{movie.original_title}</p>
+                    </Link>
                     <button>+ Watch list</button>
                 </div>
             </li>
