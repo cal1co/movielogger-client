@@ -75,3 +75,12 @@
     display:inline-block;
     padding-left:10px;
 }
+
+.lds-ellipsis {
+    /* display: inline-block; */
+    position: relative;
+    width: 80px;
+    height: 80px;
+    left:50%;
+    transform:translateX(-50%)
+  }

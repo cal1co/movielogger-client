@@ -51,36 +51,44 @@ function Title() {
             await axios.get(URLS.HEAD + input + URLS.SERVICES)
             .then((res) => {
                 console.log("RESULTS!!!", res.data.results.AU)
-                setServices(res.data.results.AU)
+                if (res.data.results.AU !== undefined){
+                    setServices(res.data.results.AU)
+                    setFetchedServices(true)
+                }
+
             })
             .catch((err) => {
                 console.error(err)
             })
             console.log('SERVICES:', services)
-            setFetchedServices(true)
         }
     }
 
     const renderStreamingPlatforms = () => {
         console.log(services.flatrate)
         // let streaming = services.flatrate
-        return services.flatrate.map((service: any, idx: number) => {
-            return <div className="service-element" key={service.id} id={`${idx+1}`}>
-                <abbr title={service.provide_name}>
-                <img className="service-platform" src={URLS.POSTER + service.logo_path} />
-                </abbr>
-            </div>
-        })
+        if (services !== undefined){
+            return services.flatrate.map((service: any, idx: number) => {
+                return <div className="service-element" key={service.id} id={`${idx+1}`}>
+                    <abbr title={service.provide_name}>
+                    <img className="service-platform" src={URLS.POSTER + service.logo_path} />
+                    </abbr>
+                </div>
+            })
+        }
     }
 
     const renderPurchasePlatforms = () => {
-        return services.rent.map((service: any, idx: number) => {
-            return <div className="service-element" key={service.id} id={`${idx+1}`}>
-                <abbr title={service.provide_name}>
-                <img className="service-platform" src={URLS.POSTER + service.logo_path} />
-                </abbr>
-            </div>
-        })
+        if (services !== undefined){
+            return services.rent.map((service: any, idx: number) => {
+                return <div className="service-element" key={service.id} id={`${idx+1}`}>
+                    <abbr title={service.provide_name}>
+                    <img className="service-platform" src={URLS.POSTER + service.logo_path} />
+                    </abbr>
+                </div>
+            })
+
+        }
     }
 
     return (
