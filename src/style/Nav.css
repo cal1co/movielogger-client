@@ -30,8 +30,8 @@
     color:white;
     font-weight:bolder;
     font-size:larger;
-    background: -webkit-linear-gradient(#dddd, slateblue);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    background: -webkit-linear-gradient(left, #dddd, slateblue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     cursor:pointer;
 }

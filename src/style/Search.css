@@ -8,6 +8,13 @@
     width:35vw;
     border-radius:0.25rem; 
 }
+.search-query{
+    font-weight:500;
+}
+.search-query > div{
+    display:inline-block;
+    font-weight:bolder;
+}
 
 .search:focus{
     /* border:20px; */
