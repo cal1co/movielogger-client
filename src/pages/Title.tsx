@@ -98,13 +98,13 @@ function Title() {
                 ?
                 <div className="loading-msg">
                     <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                    <div>Fetching data...</div>
+                    <div className="load-msg">Fetching data...</div>
                 </div>
                 :
                 <div>
-                    <div className="loading-msg" style={{display: backdropLoaded ? 'none' : 'inline-block'}}>
+                    <div className="loading-msg" style={{display: backdropLoaded ? 'none' : 'contents'}}>
                         <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-                        <div>Loading resources...</div>
+                        <div className="load-msg">Loading resources...</div>
                     </div>
                     
                     <div className="">

@@ -58,16 +58,19 @@
     font-weight:bolder;
     margin:0;
 }
-
+.streaming-platforms{
+    height:fit-content;
+}
 .service-platform{
     position:relative;
-    transition: all .2s ease-in;
+    transition: all .1s ease-in;
     height:4vw;
     border-radius:0.25rem;
+    top:3%;
 }
 .service-platform:hover{
-    height:5vw;
-    top:10%;
+    /* height:5vw; */
+    top:-3%;
     cursor:pointer;
 }
 
@@ -76,11 +79,9 @@
     padding-left:10px;
 }
 
-.lds-ellipsis {
-    /* display: inline-block; */
-    position: relative;
-    width: 80px;
-    height: 80px;
-    left:50%;
+.load-msg{
+    width:fit-content;
+    position:relative;
+    left: 50%;
     transform:translateX(-50%)
-  }
+}
