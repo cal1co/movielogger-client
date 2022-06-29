@@ -21,7 +21,7 @@ function searchResults(){
         setLoading(true)
         await getSearchData()
     }
-    execSearch
+    // execSearch // RECENTLY COMMENTED IF SOMETHING BREAKS IT'S HERE LOL <---------
     const getSearchData = async () => {
         // setLoading(true)
         await axios.get(URLS.SEARCH + searchQuery)
