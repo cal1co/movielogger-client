@@ -72,16 +72,16 @@ body{
 .home-element > li {
     list-style-type:none;
 }
-.home-element > li > img {
+.res-img {
     width:20vw;
     border-radius: .2rem;
 }
-.home-element > li > img:hover {
+.res-img:hover {
     cursor:pointer;
     /* filter:blur(0.05rem); */
     filter:brightness(0.95)
 }
-.home-element > li > img:active {
+.res-img:active {
     cursor:grab;
     filter:brightness(0.8);
 }
