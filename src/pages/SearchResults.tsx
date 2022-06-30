@@ -13,9 +13,7 @@ function searchResults(){
     const { searchQuery } = location.state
 
     useEffect(() => {
-        console.log("QUERY HERE", searchQuery)
         execSearch()
-        // return () => console.log("IM OUT")
     }, [searchQuery])
 
     const execSearch = async () => {
@@ -27,7 +25,6 @@ function searchResults(){
         // setLoading(true)
         await axios.get(URLS.SEARCH + searchQuery)
             .then((res) => {
-                console.log(res.data.results)
                 setLoading(false)
                 setResults(res.data.results)
             })

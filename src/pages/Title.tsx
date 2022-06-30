@@ -47,7 +47,7 @@ function Title() {
    
     const getServices = async (input:number) => {
         if (input !== 0){
-            console.log(input)
+            // console.log(input)
             await axios.get(URLS.HEAD + input + URLS.SERVICES)
             .then((res) => {
                 if (res.data.results.AU !== undefined){
@@ -73,7 +73,6 @@ function Title() {
 
 
     const renderStreamingPlatforms = () => {
-        console.log(services.flatrate)
         // let streaming = services.flatrate
         if (services !== undefined){
             return services.flatrate.map((service: any, idx: number) => {
