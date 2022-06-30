@@ -4,10 +4,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import URLS from '../api/movieApi'
 
-interface stateType {
-    from: {pathname: object}
-}
-
 
 function Title() {
     const [filmData, setFilmData] = useState(Object)
@@ -16,7 +12,7 @@ function Title() {
     const [backdropLoaded, setBackdropLoaded] = useState(false)
     const [services, setServices] = useState(Object)
     const [fetchedServices, setFetchedServices] = useState(false)
-    const location = useLocation()
+    const location:any = useLocation()
 
 
     useEffect(() => {
