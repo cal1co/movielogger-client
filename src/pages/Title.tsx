@@ -4,6 +4,11 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import URLS from '../api/movieApi'
 
+interface stateType {
+    from: {pathname: object}
+}
+
+
 function Title() {
     const [filmData, setFilmData] = useState(Object)
     const [filmId, setFilmId] = useState(Number)
@@ -23,6 +28,7 @@ function Title() {
             const { movieInfo } = location.state
             // console.log("MOVIE INFO", movieInfo.backdrop_path)
             setFilmId(movieInfo.id)
+            await getCredits(movieInfo.id)
             setFilmData(movieInfo)
             // console.log(filmData.backdrop_path, "PATH")
         } else {
@@ -30,15 +36,14 @@ function Title() {
             arr.splice(0,4)
             let movieId = parseInt(arr.join(''))
             setFilmId(movieId)
-            console.log('location', movieId)
             await axios.get(URLS.HEAD + movieId + URLS.KEY)
             .then((res) => {
-                console.log(res.data)
                 setFilmData(res.data)
             })
             .catch((err) => {
                 console.error(err)
             })
+            await getCredits(movieId)
         }
         await getServices(filmId)
         setLoading(false)
@@ -46,23 +51,30 @@ function Title() {
    
     const getServices = async (input:number) => {
         if (input !== 0){
-
             console.log(input)
             await axios.get(URLS.HEAD + input + URLS.SERVICES)
             .then((res) => {
-                console.log("RESULTS!!!", res.data.results.AU)
                 if (res.data.results.AU !== undefined){
                     setServices(res.data.results.AU)
                     setFetchedServices(true)
                 }
-
             })
             .catch((err) => {
                 console.error(err)
             })
-            console.log('SERVICES:', services)
         }
     }
+
+    const getCredits = async (input:number) => {
+        await axios.get(URLS.HEAD + input + URLS.CREDITS + URLS.KEY)
+        .then((res) => {
+            console.log(res.data)
+        })
+        .catch((err) => {
+            console.error(err)
+        })
+    }
+
 
     const renderStreamingPlatforms = () => {
         console.log(services.flatrate)

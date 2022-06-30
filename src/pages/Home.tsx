@@ -53,13 +53,19 @@ function Home() {
             console.error(err)
         })
     }
+    const handleLoad = async (id:number) => {
+        imgLoaded.push(id)
+        if (imgLoaded.length === 60){
+            console.log('all images ready!')
+        }
+    }
 
     const renderResults = (input: Array<Object>, group:String) => {
         return input.map((movie: any, idx: number) => {
             return <div className="home-element" key={movie.id} id={`${group}-${idx+1}`}>
             <li key={movie.id}>
                 <Link to={`/title?id=${movie.id}`}>
-                    <img className="res-img" src={URLS.POSTER + movie.poster_path}/>
+                    <img className="res-img" src={URLS.POSTER + movie.poster_path} onLoad={() => handleLoad(idx)}/>
                 </Link>
                 <div className="movie-info">
                     <div className="user-rate">
@@ -78,7 +84,7 @@ function Home() {
 
     const scrollGroup = (elem:string, right:boolean) => {
         let target = document.getElementById(elem)
-        console.log(target ,document.documentElement.clientWidth)
+        // console.log(target ,document.documentElement.clientWidth)
         if (target){
             let scrollVal = (document.documentElement.clientWidth)
             if (scrollCount === 4 && right){
