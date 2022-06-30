@@ -1,3 +1,4 @@
+import React from 'react'
 import '../style/Home.css'
 import { useEffect, useState } from 'react'
 import URLS from '../api/movieApi'
@@ -20,7 +21,7 @@ function Home() {
     const getHomePageFilmData = async () => {
         await getPopularFilms()
         await getTopFilms()
-        await getTredingFilmsWeekly()
+        await getTrendingFilmsWeekly()
         setLoading(false)
     }
     
@@ -37,6 +38,7 @@ function Home() {
     const getTopFilms = async () => {
         await axios.get(URLS.TOP_RATED)
         .then((res) => {
+            console.log(res.data.results)
             setTopData(res.data.results)
         })
         .catch((err) => {
@@ -44,7 +46,7 @@ function Home() {
         })
     }
 
-    const getTredingFilmsWeekly = async () => {
+    const getTrendingFilmsWeekly = async () => {
         await axios.get(URLS.TRENDING)
         .then((res) => {
             setTrendingData(res.data.results)
