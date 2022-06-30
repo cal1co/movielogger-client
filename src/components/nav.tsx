@@ -1,5 +1,5 @@
 import '../style/Nav.css'
-import { useState } from 'React'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import Search from './Search'
 
