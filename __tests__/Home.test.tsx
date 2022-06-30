@@ -1,9 +1,10 @@
 import * as React from 'react'
 import ReactDOM from 'react-dom'
-import Home from '../src/pages/Home'
-import renderer from 'react-test-renderer'
 import { render, cleanup, screen } from '@testing-library/react'
 import axios from 'axios'
+import renderer from 'react-test-renderer'
+
+import Home from '../src/pages/Home'
 import URLS from '../src/api/movieApi'
 import { getPopularFilms, popFilms, getTopFilms, topFilms } from '../src/utils/HomeUtils'
 
@@ -70,9 +71,9 @@ describe("Home", () => {
 
         })
 
-        it("should switch Loading to false after getHomePageFilmData promises are resolved", () => {
+        // it("should switch Loading to false after getHomePageFilmData promises are resolved", () => {
     
-        })
+        // })
     })
 
     describe("scrollGroup", () => {

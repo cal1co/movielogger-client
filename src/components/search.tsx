@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import URLS from '../api/movieApi'
+import React from 'react'
 import '../style/Search.css'
 
 
