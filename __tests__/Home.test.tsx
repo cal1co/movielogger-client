@@ -12,10 +12,6 @@ import { getPopularFilms, popFilms, getTopFilms, topFilms } from '../src/utils/H
 
 jest.mock("axios")
 
-
-
-
-
 afterEach(cleanup)
 
 
@@ -70,10 +66,6 @@ describe("Home", () => {
         it("should render results of getTrendingFilmsWeekly", () => {
 
         })
-
-        // it("should switch Loading to false after getHomePageFilmData promises are resolved", () => {
-    
-        // })
     })
 
     describe("scrollGroup", () => {
