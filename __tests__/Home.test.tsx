@@ -21,23 +21,6 @@ describe("Home", () => {
         jest.spyOn(React, "useEffect").mockImplementation(cb => cb())
     })
 
-    // it('renders without crashing', () => {
-    //     // const div = document.createElement("div");
-    //     // ReactDOM.render(<Home/>, div);
-    //     // ReactDOM.unmountComponentAtNode(div)
-    //     jest.spyOn(React, "useEffect").mockImplementation(cb => cb())
-    //     const handleLoad = jest.fn() 
-    //     const { container } = render(<Home/>)
-    //     expect(handleLoad).toHaveBeenCalled
-    // })
-    // const {container} = render(<Home />)
-    // console.log(container)
-    // expect(container.childElementCount).toEqual(1)
-    // expect(screen.getByText(`TODAY'S TOP PICKS ▶`)).toBeInTheDocument();
-
-    // Tests to write/find out how to write
-    // it("renders ")
-
     describe("When calls are successful", () => {
         it("should return a list of popular films", async () => {
             mockedAxios.get.mockResolvedValueOnce(popFilms)
