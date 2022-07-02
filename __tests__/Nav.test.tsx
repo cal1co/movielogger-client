@@ -14,9 +14,8 @@ describe("Nav", () => {
             expect(container.childElementCount).toEqual(1)
             expect(screen.getByText(`MOVIELOG`)).toBeInTheDocument()
         })
-        it("Should render Search child component", () => {
+        it("Should render <Search/> child component", () => {
             const { getByTestId } = render(<Router><Nav/></Router>)
-            const searchField = screen.findByDisplayValue("Search for a title")
             expect(screen.getByTestId(/search-component/)).toBeInTheDocument();
         })
 
@@ -26,5 +25,11 @@ describe("Nav", () => {
         //     fireEvent.click(component)
         // })
 
+    })
+
+    describe("<Search/>", () => {
+        it("Should submit a search of input query", () => {
+            // 
+        })
     })
 })
