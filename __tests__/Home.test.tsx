@@ -11,14 +11,10 @@ import { getPopularFilms, popFilms, getTopFilms, topFilms } from '../src/utils/H
 
 
 jest.mock("axios")
+const mockedAxios = axios as jest.Mocked<typeof axios>
 
-afterEach(cleanup)
 
-
-test("that jest is working with home", () => {
-    expect(true).toBe(true)
-})
-
+// afterEach(cleanup)
 describe("Home", () => {
     
     beforeEach(() => {
@@ -44,7 +40,7 @@ describe("Home", () => {
 
     describe("When calls are successful", () => {
         it("should return a list of popular films", async () => {
-            axios.get.mockResolvedValueOnce(popFilms)
+            mockedAxios.get.mockResolvedValueOnce(popFilms)
             const result = await getPopularFilms()
             expect(axios.get).toHaveBeenCalledWith(`${URLS.POPULAR}`);
             expect(result).toEqual(popFilms)
@@ -55,7 +51,7 @@ describe("Home", () => {
         })
 
         it("should return a list of top films", async () => {
-            axios.get.mockResolvedValueOnce(topFilms)
+            mockedAxios.get.mockResolvedValueOnce(topFilms)
             const result = await getTopFilms()
             expect(axios.get).toHaveBeenCalledWith(`${URLS.TOP_RATED}`);
             expect(result).toEqual(topFilms)
