@@ -4,7 +4,7 @@ import './style/App.css'
 import './style/Nav.css'
 import Nav from './components/Nav'
 import { HashRouter as Router } from 'react-router-dom'
-import Routers from './routers'
+import Routers from './routes'
 
 function App() {
 
