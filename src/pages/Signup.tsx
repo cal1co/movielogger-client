@@ -8,8 +8,13 @@ const header = {"Access-Control-Allow-Origin": "*"}
 function Signup() {
 
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
+    const usernameInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault()
+        setUsername(event.target.value)
+    }
     const emailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
         setEmail(event.target.value)
@@ -21,16 +26,12 @@ function Signup() {
 
 
     const submitSignup = async () => {
-        console.log("SUBMITTING SIGNUP WITH", email, password)
+        console.log("SUBMITTING SIGNUP WITH", username, email, password)
         const url = TEST_URL;
-        return axios.post(url, {email, password}, {headers: header})
+        return axios.post(url, {username, email, password}, {headers: header})
         .then((res) => {
             console.log('res:', res.data)
-            const { token, id, name } = res.data
-            localStorage.setItem('currentUserToken', token)
-            localStorage.setItem('currentUserId', id)
-            localStorage.setItem('currentUserName', name)
-            localStorage.setItem('currentUser', JSON.stringify(res.data))
+            // const { token, id, name } = res.data
         })
         .catch((err) => { // how to add a response? 
             console.error(err.response.data)
@@ -40,8 +41,9 @@ function Signup() {
     return ( 
         <div className="Login">
             <form className="login-form" onSubmit={submitSignup}>
-                <input className="email" placeholder={"email"} onChange={emailInput}/>
-                <input className="email" placeholder={"password"} onChange={passwordInput}/>
+                <input className="singup username" placeholder={"username"} onChange={usernameInput}/>
+                <input className="signup email" placeholder={"email"} onChange={emailInput}/>
+                <input className="signup password" placeholder={"password"} onChange={passwordInput}/>
                 <button type="submit">login</button>
             </form>
 
