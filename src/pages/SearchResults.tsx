@@ -44,7 +44,7 @@ function searchResults(){
                     </div>
                 </div>
                 <div className="movie-info">
-                    <Link to={`/title?id=${movie.id}`} state={{movieInfo: movie}}>
+                    <Link to={`/title/show?id=${movie.id}`} state={{movieInfo: movie}}>
                     <p className="film-title">{movie.original_title} ({movie.release_date})</p>
                     </Link>
                         

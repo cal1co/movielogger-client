@@ -31,6 +31,7 @@ function Title() {
             let arr = location.search.split('')
             arr.splice(0,4)
             let movieId = parseInt(arr.join(''))
+            console.log(movieId)
             setFilmId(movieId)
             await axios.get(URLS.HEAD + movieId + URLS.KEY)
             .then((res) => {
