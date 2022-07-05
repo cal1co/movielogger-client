@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
+import '../style/User.css'
 
 const TEST_URL = 'http://localhost:8080/user/'
 
 function User() {
-    const [username, setUsername] = useState('')
-    const [user, setUser] = useState({})
+    const [username, setUsername] = useState(String)
+    const [user, setUser] = useState(Object)
+    const [avatar, setAvatar] = useState(Object)
     const location = useLocation()
 
 
@@ -20,12 +22,15 @@ function User() {
         let currUser = arr.join('')
         axios.get(TEST_URL + currUser)
         .then((res) => {
-            console.log(res.data)
             if (res.data){
                 setUser(res.data)
-                console.log("SET USER")
+                console.log("SET USER", res.data)
+                const avi = JSON.parse(res.data.avatar)
+                setAvatar(avi)
+                console.log(avi)
             } else {
                 console.log("USER NOT SET")
+                setUser('')
             }
 
         })
@@ -36,8 +41,50 @@ function User() {
 
     return (
         <div className="userPage">
-            THIS IS THE USER PAGE FOR {username}
+            {
+                user
+                ?
+                <div className="header">
+                    <svg className="profile-img" style={{backgroundColor: avatar.color}} height='128px' width='128px'>
+                        <image href={avatar.image}></image> 
+                    </svg>
+                    <div className="profile-container">
+                        <div className="profile-bio">
+                            <div className="profile-username">
+                                @{user.username}
+                            </div>
+                            <div className="profile-follow-info">
+                                <div className="follow following">
+                                    0 Following
+                                </div>
+                                <div className="follow followers">
+                                    0 Followers
+                                </div>
+                            </div>
+                        </div>
 
+                        <div className="section-tabs">
+                            <div className="profile-ratings">
+                                Ratings
+
+                            </div>
+                            <div className="profile-watched">
+                                Watched
+                            </div>
+                            <div className="profile-watchlist">
+                                Watchlist
+
+                            </div>
+                            <div className="profile-liked">
+                                Liked
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                :
+                <p></p>
+            }
         </div>
     )
 
