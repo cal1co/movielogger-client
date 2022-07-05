@@ -24,14 +24,18 @@ function Signup() {
         setPassword(event.target.value)
     }
 
-
     const submitSignup = async () => {
         console.log("SUBMITTING SIGNUP WITH", username, email, password)
         const url = TEST_URL;
         return axios.post(url, {username, email, password}, {headers: header})
         .then((res) => {
             console.log('res:', res.data)
-            // const { token, id, name } = res.data
+            const { token, id, name } = res.data
+            // login 
+            localStorage.setItem('currentUserToken', token)
+            localStorage.setItem('currentUserId', id)
+            localStorage.setItem('currentUserName', name)
+            localStorage.setItem('currentUser', JSON.stringify(res.data))
         })
         .catch((err) => { // how to add a response? 
             console.error(err.response.data)

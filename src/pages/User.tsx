@@ -4,45 +4,95 @@ import axios from 'axios'
 import '../style/User.css'
 
 const TEST_URL = 'http://localhost:8080/user/'
+const header = {"Access-Control-Allow-Origin": "*"}
 
 function User() {
-    const [username, setUsername] = useState(String)
     const [user, setUser] = useState(Object)
+    const [userLoaded, setUserLoaded] = useState(false)
+    const [followerCount, setFollowerCount] = useState(0)
+    const [followingCount, setFollowingCount] = useState(0)
     const [avatar, setAvatar] = useState(Object)
+    const [followed, setFollowed] = useState(false)
     const location = useLocation()
 
 
     useEffect(() => {
-        getUser()
+        getUserData()
     }, [location])
 
-    const getUser = () => {
+    const getUserData = async () => {
+        await getUser()
+        setUserLoaded(true)
+    }
+    
+    const getUser = async () => {
         let arr = location.pathname.split('')
         arr.splice(0,1)
         let currUser = arr.join('')
-        axios.get(TEST_URL + currUser)
+        
+        await axios.get(TEST_URL + currUser)
         .then((res) => {
             if (res.data){
-                setUser(res.data)
-                console.log("SET USER", res.data)
+                // console.log("SET USER", res.data)
                 const avi = JSON.parse(res.data.avatar)
                 setAvatar(avi)
-                console.log(avi)
+                setUser(res.data)
+                setFollowerCount(res.data.followers.length)
+                setFollowingCount(res.data.following.length)
+                checkFollow(res.data)
+
+                // console.log(avi)
             } else {
                 console.log("USER NOT SET")
                 setUser('')
             }
-
         })
         .catch((err) => {
             console.log(err)
         })
     }
 
+    const checkFollow = async (input:any) => {
+        const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
+        console.log("INPUT", input)
+        if (input?.followers.length > 0){
+            const findUser = input.followers.some((elem:any) => elem.username === currUsername)
+            if (findUser){
+                // console.log("CURRENT USER IS FOLLOWING", user)
+                setFollowed(true)
+            }
+        }
+    }
+
+    const followUser = async () => {
+        const currUserId = localStorage.getItem('currentUserId')
+        return await axios.post(TEST_URL + 'follow', { id:currUserId, followId:user._id }, {headers: header})
+        .then((res) => {
+            console.log(res.data)
+            setFollowed(true)
+            setFollowerCount(followerCount + 1)
+        })
+        .catch((err) => {
+            console.error(err.data)
+        })
+    }
+    const unfollowUser = async () => {
+        const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
+        return await axios.post(TEST_URL + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
+        .then((res) => {
+            console.log(res.data)
+            setFollowed(false)
+            setFollowerCount(followerCount - 1)
+        })
+        .catch((err) => {
+            console.error(err.data)
+        })
+    }
+
     return (
         <div className="userPage">
             {
-                user
+                userLoaded
                 ?
                 <div className="header">
                     <svg className="profile-img" style={{backgroundColor: avatar.color}} height='128px' width='128px'>
@@ -55,10 +105,10 @@ function User() {
                             </div>
                             <div className="profile-follow-info">
                                 <div className="follow following">
-                                    0 Following
+                                    {followingCount} Following
                                 </div>
                                 <div className="follow followers">
-                                    0 Followers
+                                    {followerCount} Followers
                                 </div>
                             </div>
                             <div className="profile-utility">
@@ -67,7 +117,11 @@ function User() {
                                     ?
                                     <button>edit profile</button>
                                     :
-                                    <button>follow {user._id}, {localStorage.getItem('currentUserId')}</button>
+                                        followed
+                                        ?
+                                        <button onClick={unfollowUser}>unfollow</button>
+                                        :
+                                        <button onClick={followUser}>follow</button>
                                 }
                             </div>
                         </div>

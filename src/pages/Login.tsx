@@ -29,7 +29,7 @@ function Login() {
             const { token, id, name } = res.data
             localStorage.setItem('currentUserToken', token)
             localStorage.setItem('currentUserId', id)
-            localStorage.setItem('currentUserName', name)
+            localStorage.setItem('currentUsername', name)
             localStorage.setItem('currentUser', JSON.stringify(res.data))
         })
         .catch((err) => { // how to add a response? 
