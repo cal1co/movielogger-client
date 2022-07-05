@@ -61,7 +61,17 @@ function User() {
                                     0 Followers
                                 </div>
                             </div>
+                            <div className="profile-utility">
+                                {
+                                    (localStorage.getItem('currentUserId') === user._id)
+                                    ?
+                                    <button>edit profile</button>
+                                    :
+                                    <button>follow {user._id}, {localStorage.getItem('currentUserId')}</button>
+                                }
+                            </div>
                         </div>
+
 
                         <div className="section-tabs">
                             <div className="profile-ratings">

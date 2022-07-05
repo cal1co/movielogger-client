@@ -16,6 +16,35 @@
     transform:translate(-50%, -50%);
     color:darkgray;
 }
+.profile-utility{
+    position:relative;
+    /* right:30%; */
+    /* top:10%; */
+    left:80%;
+    width:fit-content;
+    transform:translate(-50%,-125%);
+}
+.profile-utility > button{
+    border:0.5px solid white;
+    border-bottom:1.5px solid white;
+    font-weight:bolder;
+    font-size:1.25rem;
+    background:none;
+    color:white;
+    border-radius:1em;
+    padding-inline:1rem;
+
+}
+.profile-utility > button:hover{
+    transition: all .1s ease-in;
+    background-color:rgba(106, 90, 205, 1);
+    cursor:pointer;
+}
+.profile-utility > button:active{
+    transition: none;
+    transform:translateY(1px);
+    border-bottom:0.5px solid white;
+}
 
 
 .profile-bio{
@@ -67,6 +96,7 @@
 }
 
 .section-tabs > *:hover {
+    transition: all .1s ease-in;
     background-color:rgba(0, 0, 0, 0.4);
     user-select:none;
     cursor:pointer;
