@@ -1,8 +1,9 @@
 import * as react from 'React'
 import axios from 'axios'
 import { useState } from 'react'
+import URLS from '../api/server'
 
-const TEST_URL = 'http://localhost:8080/user/signup'
+// const TEST_URL = 'http://localhost:8080/user/signup'
 const header = {"Access-Control-Allow-Origin": "*"}
 
 function Signup() {
@@ -26,7 +27,7 @@ function Signup() {
 
     const submitSignup = async () => {
         console.log("SUBMITTING SIGNUP WITH", username, email, password)
-        const url = TEST_URL;
+        const url = URLS.BASE + URLS.SIGNUP;
         return axios.post(url, {username, email, password}, {headers: header})
         .then((res) => {
             console.log('res:', res.data)

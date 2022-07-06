@@ -1,8 +1,9 @@
 import * as react from 'React'
 import axios from 'axios'
 import { useState } from 'react'
+import URLS from '../api/server'
 
-const TEST_URL = 'http://localhost:8080/user/login'
+// const TEST_URL = 'http://localhost:8080/user/login'
 const header = {"Access-Control-Allow-Origin": "*"}
 
 function Login() {
@@ -22,7 +23,7 @@ function Login() {
 
     const submitLogin = async () => {
         console.log("SUBMITTING LOGIN WITH", email, password)
-        const url = TEST_URL;
+        const url = URLS.BASE + URLS.LOGIN;
         return axios.post(url, {email, password}, {headers: header})
         .then((res) => {
             console.log('res:', res.data)

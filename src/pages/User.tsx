@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import '../style/User.css'
+import URLS from '../api/server'
 
-const TEST_URL = 'http://localhost:8080/user/'
+// const TEST_URL = 'http://localhost:8080/user/'
 const header = {"Access-Control-Allow-Origin": "*"}
 
 function User() {
@@ -39,8 +40,8 @@ function User() {
         let arr = location.pathname.split('')
         arr.splice(0,1)
         let currUser = arr.join('')
-        
-        await axios.get(TEST_URL + currUser)
+        const url = URLS.BASE + URLS.USER + currUser
+        await axios.get(url)
         .then((res) => {
             if (res.data){
                 // console.log("SET USER", res.data)
@@ -78,8 +79,9 @@ function User() {
 
     const followUser = async () => {
         const currUserId = localStorage.getItem('currentUserId')
+        const url = URLS.BASE + URLS.USER + 'follow'
         if (followed === false){
-            return await axios.post(TEST_URL + 'follow', { id:currUserId, followId:user._id }, {headers: header})
+            return await axios.post(url, { id:currUserId, followId:user._id }, {headers: header})
             .then((res) => {
                 console.log(res.data)
                 setFollowed(true)
@@ -92,8 +94,9 @@ function User() {
     }
     const unfollowUser = async () => {
         const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
+        const url = URLS.BASE + URLS.USER + 'unfollow'
         if (followed && currUsername){
-            return await axios.post(TEST_URL + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
+            return await axios.post(url + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
             .then((res) => {
                 console.log(res.data)
                 setFollowed(false)

@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import URLS from '../api/movieApi'
-
+import serverUtils from '../api/server'
 
 function UserSearch() {
     const [loading, setLoading] = useState(true)
@@ -22,7 +22,8 @@ function UserSearch() {
 
     const getSearchData = async () => {
         // setLoading(true)
-        await axios.get('http://localhost:8080/user/find/' + searchQuery)
+        const url = serverUtils.BASE + serverUtils.USER + 'find/'
+        await axios.get(url + searchQuery)
             .then((res) => {
                 setLoading(false)
                 setResults(res.data)
