@@ -17,6 +17,7 @@ function NavLinks() {
         localStorage.removeItem('currentUserId')
         localStorage.removeItem('currentUserName')
         localStorage.removeItem('currentUser')
+        location.reload()
     }
     return (
         <div className="nav-links">
