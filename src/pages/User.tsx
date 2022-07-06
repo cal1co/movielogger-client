@@ -78,6 +78,7 @@ function User() {
     }
 
     const followUser = async () => {
+        setFollowed(true)
         const currUserId = localStorage.getItem('currentUserId')
         const url = URLS.BASE + URLS.USER + 'follow'
         if (followed === false){
@@ -93,6 +94,7 @@ function User() {
         }
     }
     const unfollowUser = async () => {
+        setFollowed(false)
         const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
         const url = URLS.BASE + URLS.USER + 'unfollow'
         if (followed && currUsername){
