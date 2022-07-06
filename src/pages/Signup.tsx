@@ -1,4 +1,4 @@
-import * as react from 'React'
+import * as react from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import URLS from '../api/server'
