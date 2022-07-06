@@ -35,7 +35,8 @@
     - Ratings: 
         - A new model containing a film id (number) and a score given (number)
     - NOTE: Look into multisearch (https://www.themoviedb.org/talk/5c8f9b319251410ffca3d366?language=en-AU)
-        - You don't want to be making a request for each film. searching for multiple at once would be best.
+        - You don't want to be making a request for each film. searching for multiple at once would be best. 
+        - IF NOT, YOU CAN JUST SAVE MOVIE DATA TO A USER (id, name, poster)? 
 
 
 
