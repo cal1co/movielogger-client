@@ -12,7 +12,6 @@ function NavLinks() {
     }, [name])
 
 
-
     return (
         <div className="nav-links">
             
