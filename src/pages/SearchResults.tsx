@@ -10,7 +10,7 @@ function searchResults(){
     const [query, setQuery] = useState('')
 
     const location:any = useLocation()
-    const { searchQuery } = location.state
+    const searchQuery = location.search.slice(7)
 
     useEffect(() => {
         execSearch()
@@ -60,7 +60,7 @@ function searchResults(){
         <div className="searchResults">
             <div className="search-query">
                 RESULTS FOR:
-                <div>"{ decodeURIComponent(searchQuery) }"</div>
+                <div>"{ searchQuery }"</div>
             </div>
 
             {
