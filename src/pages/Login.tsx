@@ -1,7 +1,7 @@
 import * as react from 'react'
 import axios from 'axios'
 import { useState } from 'react'
-import URLS from '../api/Server'
+import URLS from '../api/server'
 
 // const TEST_URL = 'http://localhost:8080/user/login'
 const header = {"Access-Control-Allow-Origin": "*"}

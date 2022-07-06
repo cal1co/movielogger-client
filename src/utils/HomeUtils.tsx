@@ -1,5 +1,5 @@
 import axios from 'axios'
-import URLS from '../api/MovieApi'
+import URLS from '../api/movieApi'
 
 
 export const getPopularFilms = async () => {

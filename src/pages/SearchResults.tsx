@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import URLS from '../api/MovieApi'
+import URLS from '../api/movieApi'
 
 
 function searchResults(){

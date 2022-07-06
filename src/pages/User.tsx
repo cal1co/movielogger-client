@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import '../style/User.css'
-import URLS from '../api/Server'
+import URLS from '../api/server'
 
 // const TEST_URL = 'http://localhost:8080/user/'
 const header = {"Access-Control-Allow-Origin": "*"}

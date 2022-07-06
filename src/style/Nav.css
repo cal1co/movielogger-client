@@ -36,3 +36,15 @@
     -webkit-text-fill-color: transparent;
     cursor:pointer;
 }
+
+.nav-links{
+    position:relative;
+    left:25%;
+    top:25%;
+    /* transform:translate(-50%, -50%); */
+}
+.prof-link{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
