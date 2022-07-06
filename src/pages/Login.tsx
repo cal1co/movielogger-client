@@ -4,7 +4,6 @@ import { useState } from 'react'
 import URLS from '../api/server'
 
 // const TEST_URL = 'http://localhost:8080/user/login'
-const header = {"Access-Control-Allow-Origin": "*"}
 
 function Login() {
 
@@ -20,11 +19,12 @@ function Login() {
         setPassword(event.target.value)
     }
 
-
     const submitLogin = async () => {
         console.log("SUBMITTING LOGIN WITH", email, password)
         const url = URLS.BASE + URLS.LOGIN;
-        return axios.post(url, {email, password}, {headers: header})
+        // const setHeader = {"Access-Control-Allow-Origin": location.origin}
+        const setHeader = {"Access-Control-Allow-Origin": "*"}
+        return axios.post(url, {email, password}, {headers: setHeader})
         .then((res) => {
             console.log('res:', res.data)
             const { token, id, name } = res.data
