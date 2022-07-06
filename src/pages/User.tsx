@@ -9,6 +9,8 @@ const header = {"Access-Control-Allow-Origin": "*"}
 function User() {
     const [user, setUser] = useState(Object)
     const [userLoaded, setUserLoaded] = useState(false)
+    const [currUserLoggedIn, setCurrUserLoggedIn] = useState(false)
+    const [currUser, setCurrUser] = useState(Object)
     const [followerCount, setFollowerCount] = useState(0)
     const [followingCount, setFollowingCount] = useState(0)
     const [avatar, setAvatar] = useState(Object)
@@ -23,6 +25,14 @@ function User() {
     const getUserData = async () => {
         await getUser()
         setUserLoaded(true)
+        await getCurrUser()
+    }
+    const getCurrUser = async () => {
+        const currUserData = JSON.parse(localStorage.getItem('currentUser') || '{}').name
+        if (currUserData){
+            setCurrUserLoggedIn(true)
+            setCurrUser(currUserData)
+        }
     }
     
     const getUser = async () => {
@@ -40,7 +50,6 @@ function User() {
                 setFollowerCount(res.data.followers.length)
                 setFollowingCount(res.data.following.length)
                 checkFollow(res.data)
-
                 // console.log(avi)
             } else {
                 console.log("USER NOT SET")
@@ -60,33 +69,40 @@ function User() {
             if (findUser){
                 // console.log("CURRENT USER IS FOLLOWING", user)
                 setFollowed(true)
+                return true
+            } else {
+                return false
             }
         }
     }
 
     const followUser = async () => {
         const currUserId = localStorage.getItem('currentUserId')
-        return await axios.post(TEST_URL + 'follow', { id:currUserId, followId:user._id }, {headers: header})
-        .then((res) => {
-            console.log(res.data)
-            setFollowed(true)
-            setFollowerCount(followerCount + 1)
-        })
-        .catch((err) => {
-            console.error(err.data)
-        })
+        if (followed === false){
+            return await axios.post(TEST_URL + 'follow', { id:currUserId, followId:user._id }, {headers: header})
+            .then((res) => {
+                console.log(res.data)
+                setFollowed(true)
+                setFollowerCount(followerCount + 1)
+            })
+            .catch((err) => {
+                console.error(err.data)
+            })
+        }
     }
     const unfollowUser = async () => {
-        const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
-        return await axios.post(TEST_URL + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
-        .then((res) => {
-            console.log(res.data)
-            setFollowed(false)
-            setFollowerCount(followerCount - 1)
-        })
-        .catch((err) => {
-            console.error(err.data)
-        })
+        const currUsername = JSON.parse(localStorage.getItem('currentUser')).name
+        if (followed && currUsername){
+            return await axios.post(TEST_URL + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
+            .then((res) => {
+                console.log(res.data)
+                setFollowed(false)
+                setFollowerCount(followerCount - 1)
+            })
+            .catch((err) => {
+                console.error(err.data)
+            })
+        }
     }
 
     return (
@@ -111,19 +127,25 @@ function User() {
                                     {followerCount} Followers
                                 </div>
                             </div>
-                            <div className="profile-utility">
                                 {
-                                    (localStorage.getItem('currentUserId') === user._id)
+                                    currUserLoggedIn
                                     ?
-                                    <button>edit profile</button>
+                                        <div className="profile-utility">
+                                            {
+                                                (localStorage.getItem('currentUserId') === user._id)
+                                                ?
+                                                <button>edit profile</button>
+                                                :
+                                                    followed
+                                                    ?
+                                                    <button onClick={unfollowUser}>unfollow</button>
+                                                    :
+                                                    <button onClick={followUser}>follow</button>
+                                            }
+                                        </div>
                                     :
-                                        followed
-                                        ?
-                                        <button onClick={unfollowUser}>unfollow</button>
-                                        :
-                                        <button onClick={followUser}>follow</button>
+                                    <p></p>
                                 }
-                            </div>
                         </div>
 
 
