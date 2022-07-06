@@ -33,9 +33,9 @@ function Nav() {
           ?
           <NavLinks/>
           : 
-          <div className="loginSignup">
-            <Link to={'/user/login'} ><button className="login-butt">Login</button></Link>
-            <Link to={'/user/signup'}><button className="signup-butt">Signup</button></Link>
+          <div className="login-signup">
+            <Link to={'/user/login'} ><button className="nav-butt login-butt">Login</button></Link>
+            <Link to={'/user/signup'} ><button className="nav-butt signup-butt">Signup</button></Link>
           </div>
         }
     </div>
