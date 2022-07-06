@@ -50,18 +50,12 @@
     display:flex;
     position:relative;
     justify-content:left;
-    /* top:50%; */
-    /* transform:translateY(-50%) */
 }
 .searchform{
-    position:relative;
-    /* top:50%; */
+    /* position:relative; */
     height:fit-content;
     width:fit-content;
-    flex:1;
-    /* transform:translateY(-50%); */
-    /* transform:translateY(-6%) */
-    /* top:0%; */
+    /* flex:1; */
 }
 .search-input{
     position:relative;
@@ -78,6 +72,13 @@
     border:2px solid slateblue;
 }
 
+.search-option-drop{
+    background:white;
+    border:2px solid crimson;
+    height:200px;
+    position:absolute;
+    z-index:1000;
+}
 
 
 

@@ -5,11 +5,12 @@ import URLS from '../api/movieApi'
 import React from 'react'
 import '../style/Search.css'
 import movieImg from '../images/film.png'
-
+import user from '../images/user.png'
 
 function Search() {
     const [query, setQuery] = useState("")
     const [searchSelected, setSearchSelected] = useState(true)
+    const [optionSelected, setOptionSelected] = useState(false)
 
     const newQuery = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
@@ -20,10 +21,17 @@ function Search() {
       <div className="Search">
         <div className="navSearch">
 
-        <button className="search-option title-opt">
-            <img src={movieImg} className="search-opt-img"/>
+        <button className="search-option title-opt" style={{display: searchSelected ? 'block' : 'none'}}>
+            <img src={movieImg} className="search-opt-img" style={{display: searchSelected ? 'block' : 'none'}}/>
         </button>
-        <button className="search-option user-opt" style={{display: searchSelected ? 'none' : 'contents'}}></button>
+
+        <button className="search-option user-opt" style={{display: searchSelected ? 'none' : 'block'}}>
+            <img src={user} className="search-opt-img" style={{display: searchSelected ? 'none' : 'block'}}/>
+        </button>
+
+        <div className="search-option-drop" style={{display: optionSelected ? 'contents' : 'none'}}>
+            hello?
+        </div>
         
         <form className="searchform">
             <input name="search" className="search-input" placeholder={"Search for a title"} type={"text"} onChange={newQuery}></input>
