@@ -1,13 +1,87 @@
 .Search{
     left:30%;
 }
-.search{
+
+
+.search-butt{
+    /* flex:1; */
+    /* position:relative; */
+    background:none;
+    border:none;
+    /* top:50%; */
+    position:absolute;
+}
+.magnify{
+    position:relative;
+    cursor:pointer;
+    transform:translate(-150%, 10%)
+    /* top:55%; */
+}
+
+.NavLinks{
+    position:relative;
+    left:40%;
+}
+
+.search-option{
+    background:white;
+    border:none;
+    position:relative;
+    top:50%;
+    /* transform:translate(0,11%); */
+    /* height:2em; */
+    height:auto;
+    width:fit-content;
+    border-radius:0.25em 0 0 0.25em;
+    border-right:0.5px solid #111111;
+}
+.search-opt-img{
+    height:2em;
+}
+.search-option:hover{
+    cursor:pointer;
+    background:rgba(255, 255, 255, 0.9)
+}
+.search-option:active{
+    background:rgba(255, 255, 255, 0.8)
+}
+
+.navSearch{
+    display:flex;
+    position:relative;
+    justify-content:left;
+    /* top:50%; */
+    /* transform:translateY(-50%) */
+}
+.searchform{
+    position:relative;
+    /* top:50%; */
+    height:fit-content;
+    width:fit-content;
+    flex:1;
+    /* transform:translateY(-50%); */
+    /* transform:translateY(-6%) */
+    /* top:0%; */
+}
+.search-input{
+    position:relative;
+    top:0%;
+    height:2em;
     outline:none;
     border-color:transparent;
     min-height:3vh;
     width:35vw;
-    border-radius:0.25rem; 
+    border-radius:0 0.25em 0.25em 0;
 }
+.search-input:focus{
+    transition: all .2s ease-in;
+    border:2px solid slateblue;
+}
+
+
+
+
+
 .search-query{
     font-weight:500;
 }
@@ -15,34 +89,10 @@
     display:inline-block;
     font-weight:bolder;
 }
-
-.search:focus{
-    /* border:20px; */
-    transition: all .2s ease-in;
-
-    border:2px solid slateblue;
-    /* box-shadow: 0 0 10px slateblue; */
-}
-
-.search-butt{
-    flex:1;
-    position:relative;
-    background:none;
-    border:none;
-    top:50%;
-}
-.magnify{
-    /* position:relative; */
-    cursor:pointer;
-    top:50%;
-    transform:translate(-150%, 30%)
-}
-
 .search-img{
     max-width:80px;
     min-width:80px;
 }
-
 .search-element{
     background-color:#1a1a1a;
     margin-left:0.2rem;
