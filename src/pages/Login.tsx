@@ -3,8 +3,6 @@ import axios from 'axios'
 import { useState } from 'react'
 import URLS from '../api/server'
 
-// const TEST_URL = 'http://localhost:8080/user/login'
-
 function Login() {
 
     const [email, setEmail] = useState('')
@@ -20,10 +18,8 @@ function Login() {
     }
 
     const submitLogin = async () => {
-        console.log("SUBMITTING LOGIN WITH", email, password)
         const url = URLS.BASE + URLS.LOGIN;
         const setHeader = {"Access-Control-Allow-Origin": location.origin}
-        // const setHeader = {"Access-Control-Allow-Origin": "*"}
         return axios.post(url, {email, password}, {headers: setHeader})
         .then((res) => {
             console.log('res:', res.data)
@@ -45,10 +41,6 @@ function Login() {
                 <input className="email" placeholder={"password"} onChange={passwordInput}/>
                 <button type="submit">login</button>
             </form>
-
-
-
-
         </div>
     )
 
