@@ -5,7 +5,7 @@ import axios from 'axios'
 import renderer from 'react-test-renderer'
 
 import Home from '../src/pages/Home'
-import URLS from '../src/api/movieApi'
+import URLS from '../src/api/MovieApi'
 import { getPopularFilms, popFilms, getTopFilms, topFilms } from '../src/utils/HomeUtils'
 
 

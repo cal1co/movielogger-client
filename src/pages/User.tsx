@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import '../style/User.css'
-import URLS from '../api/server'
+import URLS from '../api/Server'
 
 // const TEST_URL = 'http://localhost:8080/user/'
 const header = {"Access-Control-Allow-Origin": "*"}
@@ -96,7 +96,7 @@ function User() {
         const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
         const url = URLS.BASE + URLS.USER + 'unfollow'
         if (followed && currUsername){
-            return await axios.post(url + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
+            return await axios.post(url, { username:currUsername, followedUsername:user.username }, {headers: header})
             .then((res) => {
                 console.log(res.data)
                 setFollowed(false)

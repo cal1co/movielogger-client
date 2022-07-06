@@ -1,7 +1,7 @@
 import React from 'react'
 import '../style/Home.css'
 import { useEffect, useState } from 'react'
-import URLS from '../api/movieApi'
+import URLS from '../api/MovieApi'
 import axios from 'axios'
 import {Link} from 'react-router-dom'
 // import { HashLink } from 'react-router-hash-link';

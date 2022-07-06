@@ -33,7 +33,10 @@ function Nav() {
           ?
           <NavLinks/>
           : 
-          <p>button to signup/login etc</p>
+          <div className="loginSignup">
+            <Link to={'/user/login'} ><button className="login-butt">Login</button></Link>
+            <Link to={'/user/signup'}><button className="signup-butt">Signup</button></Link>
+          </div>
         }
     </div>
   )

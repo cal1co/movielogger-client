@@ -2,7 +2,7 @@ import '../style/Title.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import URLS from '../api/movieApi'
+import URLS from '../api/MovieApi'
 
 
 function Title() {
