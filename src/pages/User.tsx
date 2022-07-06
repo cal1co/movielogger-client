@@ -64,7 +64,7 @@ function User() {
     const checkFollow = async (input:any) => {
         const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
         console.log("INPUT", input)
-        if (input?.followers.length > 0){
+        if (input?.followers.length >= 0){
             const findUser = input.followers.some((elem:any) => elem.username === currUsername)
             if (findUser){
                 // console.log("CURRENT USER IS FOLLOWING", user)
