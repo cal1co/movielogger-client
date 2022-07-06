@@ -91,7 +91,7 @@ function User() {
         }
     }
     const unfollowUser = async () => {
-        const currUsername = JSON.parse(localStorage.getItem('currentUser')).name
+        const currUsername = JSON.parse(localStorage.getItem('currentUser') || '{}').name
         if (followed && currUsername){
             return await axios.post(TEST_URL + 'unfollow', { username:currUsername, followedUsername:user.username }, {headers: header})
             .then((res) => {
