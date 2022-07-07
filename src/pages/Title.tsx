@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import URLS from '../api/movieApi'
+import StarRatings from 'react-star-ratings'
 
 
 function Title() {
@@ -100,6 +101,10 @@ function Title() {
         }
     }
 
+    const rateTitle = (newRating:any) => {
+        console.log("CHANGED", newRating)
+    }
+
     return (
         <div className="film-page">
             {
@@ -121,7 +126,15 @@ function Title() {
                     <div className="title-block" key={filmData.id} style={{display: backdropLoaded ? 'grid' : 'none'}}>
                         <img className="title-img" src={URLS.POSTER + filmData.poster_path}/>
                         <img className="backdrop" src={URLS.BACKDROP + filmData.backdrop_path} onLoad={() => setBackdropLoaded(true)}/>
-
+                        
+                        
+                        
+                        
+                        
+                        <StarRatings changeRating={rateTitle} rating={0} starEmptyColor="grey" starHoverColor="orange" starRatedColor="orange" starDimension="2em" starSpacing="0.5em" />
+                        
+                        
+                        
                         <div className="filmData-info">
                             <p className="title-name">{filmData.original_title}</p>
                             <p className="synopsis">Synopsis:</p>
