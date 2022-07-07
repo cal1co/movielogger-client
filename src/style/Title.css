@@ -14,8 +14,14 @@
 
 .backdrop{
     position:fixed;
-    width:100vw;
-    min-width: 540px;
+    /* width:100vw; */
+    max-height:80vh;
+    background-size:cover;
+    background-repeat:no-repeat;
+    /* background-position:center; */
+    /* overflow:hidden; */
+    /* min-width: 540px; */
+    /* transform:translateX(-25%); */
     filter:blur(0.0rem) invert(20%) sepia(96%) saturate(2717%) hue-rotate(219deg) brightness(75%) contrast(97%)
 }
 
