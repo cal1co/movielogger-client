@@ -22,7 +22,10 @@ function Login() {
     }
 
     const checkDisable = () => {
-        if (email && password){
+        let emailField = document.getElementById("email-box")
+        let passField = document.getElementById("pass-box")
+        // console.log(emailField.value, passField.value)
+        if (emailField.value && passField.value){
             console.log("DISABLE NOW")
             setDisable(false)
         } else {
@@ -49,21 +52,15 @@ function Login() {
     const renderError = () => {
         return <div className="error-msg">
             {
-            errorMsg.response
+                <h3 className="">
+                    {errorMsg.response}
+                </h3>
             }
         </div>
     }
 
     return ( // ADD REMEMBER ME RADIO BUTTON
         <div className="Login">
-            <div className="login-form">
-
-                <form className="login-form" onSubmit={submitLogin}>
-                    <input className="email" placeholder={"email"} onChange={emailInput}/>
-                    <input className="email" placeholder={"password"} onChange={passwordInput}/>
-                    <button disabled={disable}type="submit">login</button>
-                </form>
-            </div>
             <div className="error">
 
                 {
@@ -73,6 +70,14 @@ function Login() {
                     :
                     <p></p>
                 }
+            </div>
+            <div className="login-form">
+
+                <form className="login-form" onSubmit={submitLogin}>
+                    <input className="email" id="email-box" placeholder={"email"} onChange={emailInput}/>
+                    <input className="password" id="pass-box" placeholder={"password"} onChange={passwordInput}/>
+                    <button disabled={disable}type="submit">login</button>
+                </form>
             </div>
         </div>
     )

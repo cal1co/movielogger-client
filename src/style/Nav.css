@@ -67,3 +67,27 @@
     left:25%;
     transform:translate(0%, -100%)
 }
+
+.Login{
+    /* border:1px solid red; */
+    display:grid;
+    justify-content:center;
+    justify-items:center;
+}
+.login-form{
+    display:grid;
+    position:relative;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    width:30em;
+    height:10em;
+
+}
+.error{
+    height:fit-content;
+}
+.error-msg{
+    height:2em;
+    color:red
+}
