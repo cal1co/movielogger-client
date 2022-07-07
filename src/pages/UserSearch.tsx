@@ -44,7 +44,7 @@ function UserSearch() {
                             </svg>
                         </div>
                         <div className="user-result-username">
-                            @{user.username}
+                            <p>@{user.username}</p>
                         </div>
                     </div>
                 </Link>
