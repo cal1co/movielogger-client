@@ -34,10 +34,11 @@ function Title() {
             let arr = location.search.split('')
             arr.splice(0,4)
             let movieId = parseInt(arr.join(''))
-            console.log(movieId)
+            // console.log(movieId)
             setFilmId(movieId)
             await axios.get(URLS.HEAD + movieId + URLS.KEY)
             .then((res) => {
+                // console.log(res.data)
                 setFilmData(res.data)
             })
             .catch((err) => {
@@ -129,11 +130,19 @@ function Title() {
                         <img className="title-img" src={URLS.POSTER + filmData.poster_path}/>
                         <img className="backdrop" src={URLS.BACKDROP + filmData.backdrop_path} onLoad={() => setBackdropLoaded(true)}/>
                         
-                        <StarRatings changeRating={rateTitle} rating={rating} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/>
+
+                        <div className="rating-stars">
+                            <div className="user-rate">
+                                {/* User Score: */}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="user-star" id="iconContext-star" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path></svg>
+                                {filmData.vote_average / 2}/5 · {filmData.vote_count}
+                            </div>
+                            
+                            <StarRatings changeRating={rateTitle} rating={rating} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/>
+                        </div>
                         
-                        
-                        <div className="filmData-info">
                             <p className="title-name">{filmData.original_title}</p>
+                        <div className="filmData-info">
                             <p className="synopsis">Synopsis:</p>
                             <p className="title-overview">{filmData.overview}</p>
 

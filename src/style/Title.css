@@ -1,15 +1,20 @@
 .title-block{
-    height:fit-content;
+    height:80vh;
     display:grid;
-    grid-template-rows:10vh 40vh;
+    grid-template-rows:10vh 47.5vh;
     grid-template-columns: 40vw;
+    justify-content:center;
+    /* align-items:center; */
     /* grid-template-rows: repeat(2, 0.5fr); */
     grid-template-areas:
-    "title title"
+    "title-area title"
     "poster-side movie-info"
+    "rating movie-info"
 }
+.title-name{ grid-area: title-area }
 .title-img{ grid-area: poster-side; }
-.filmData-info{ grid-area: movie-info;}
+.filmData-info{ grid-area: movie-info; }
+.rating-stars{ grid-area: rating; }
 
 
 .backdrop{
@@ -19,17 +24,13 @@
     object-fit:cover;
     background-size:cover;
     background-repeat:no-repeat;
-    /* background-position:center; */
-    /* overflow:hidden; */
-    /* min-width: 540px; */
-    /* transform:translateX(-25%); */
+    z-index:-1;
     filter:blur(0.0rem) invert(20%) sepia(96%) saturate(2717%) hue-rotate(219deg) brightness(75%) contrast(97%)
 }
 
 .title-img{
     position:relative;
     z-index:99999999; 
-    /* top:50%; */
     left:50%;
     transform:translateX(-50%);
     width:auto;
@@ -39,13 +40,15 @@
 }
 
 .title-name{
-    position:absolute;
+    position:relative;
     z-index:1;
-    top:8%;
-    left:8vw;
+    display:flex;
+    justify-content:center;
+    align-items:center;
     font-weight:bolder;
     font-size:larger;
     text-decoration:underline;
+    text-align:center;
 }
 
 .filmData-info{
@@ -91,10 +94,20 @@
     left: 50%;
     transform:translateX(-50%)
 }
-.star-container{
-    /* width:3em; */
+
+.rating-stars{
+    display:flexbox;
+    justify-content:center;
 }
-/* .widget-svg{
-    width:30px; 
-    height:30px;
-} */
+.user-rate{
+    display:flex;
+    justify-items:center;
+    justify-content:center;
+}
+.star-ratings{
+    left:50%;
+    transform:translateX(-50%)
+    /* display:flex; */
+    /* justify-items:center; */
+    /* justify-content:center; */
+}
