@@ -122,7 +122,9 @@ function User() {
         } else {
             return user.ratings.map((elem:any, idx:number) => {
                 return <div className="rating-item" id={`${idx}`}>
-                    {elem.rating} {elem.film.title}
+                    <Link to={`/title/show?id=${elem.film.id}`}>
+                        {elem.rating} {elem.film.title}
+                    </Link>
     
                 </div>
             })
