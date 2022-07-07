@@ -47,7 +47,7 @@ function Signup() {
         setDisable(true)
         console.log("SUBMITTING SIGNUP WITH", username, email, password)
         const url = URLS.BASE + URLS.SIGNUP;
-        return axios.post(url, {username, email, password}, {headers: header})
+        return await axios.post(url, {username, email, password})
         .then((res) => {
             // console.log('res:', res.data)
             const { token, id, name } = res.data
@@ -56,14 +56,14 @@ function Signup() {
             localStorage.setItem('currentUserId', id)
             localStorage.setItem('currentUserName', name)
             localStorage.setItem('currentUser', JSON.stringify(res.data))
-            if (location.state.lastPage){
+            if (location!.state.lastPage){
                 navigate(location.state.lastPage)
             } else {
                 navigate(`/${name}`)
             }
         })
         .catch((err) => { // how to add a response? 
-            // console.error(err.response.data)
+            console.error(err)
             setErrorMsg(err.response.data)
             setDisable(false)
         })
