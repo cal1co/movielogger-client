@@ -37,14 +37,15 @@ function UserSearch() {
         return input.map((user:any, idx:number) => {
             return <div className="user-result-element">
                 <Link to={`/${user.username}`}>
-
-                    <div className="user-result-avi">
-                        <svg className="user-result-profile-img" style={{backgroundColor: JSON.parse(user.avatar).color}} height='128px' width='128px'>
-                            <image className="user-result-profile-img" href={JSON.parse(user.avatar).image}></image> 
-                        </svg>
-                    </div>
-                    <div className="user-result-username">
-                        @{user.username}
+                    <div className="result-link-elem">
+                        <div className="user-result-avi">
+                            <svg className="user-result-profile-img" style={{backgroundColor: JSON.parse(user.avatar).color}} height='128px' width='128px'>
+                                <image className="user-result-profile-img" href={JSON.parse(user.avatar).image}></image> 
+                            </svg>
+                        </div>
+                        <div className="user-result-username">
+                            @{user.username}
+                        </div>
                     </div>
                 </Link>
 

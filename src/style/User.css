@@ -101,3 +101,21 @@
     user-select:none;
     cursor:pointer;
 }
+
+.user-result-element{
+    display:grid;
+    width:fit-content;
+}
+.user-result-element > * {
+    width:fit-content;
+}
+.result-link-elem{
+    display:flex;
+    align-items:center;
+    gap:1em;
+}
+.user-result-username{
+    color:white;
+    text-decoration:none;
+    font-weight:bolder
+}
