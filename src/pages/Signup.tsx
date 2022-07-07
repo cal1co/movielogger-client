@@ -30,7 +30,7 @@ function Signup() {
         const url = URLS.BASE + URLS.SIGNUP;
         return axios.post(url, {username, email, password}, {headers: header})
         .then((res) => {
-            console.log('res:', res.data)
+            // console.log('res:', res.data)
             const { token, id, name } = res.data
             // login 
             localStorage.setItem('currentUserToken', token)

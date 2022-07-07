@@ -17,6 +17,7 @@ function Title() {
 
     useEffect(() => {
         getTitleData()
+        console.log('location', location)
     }, [filmId])
 
     const getTitleData = async () => {

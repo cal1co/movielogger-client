@@ -1,21 +1,20 @@
 import React from 'react'
 import '../style/Nav.css'
 import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import Search from './Search'
 import NavLinks from './NavLinks'
 import axios from 'axios'
 
 function Nav() {
-
   const [loggedIn, setLoggedIn] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     checkForLogin()
-  }, [loggedIn])
+  }, [location])
 
   const checkForLogin = () => {
-    console.log('CHECKING FOR LOGIN')
     let currId = localStorage.getItem('currentUserId')
     if (currId){
       setLoggedIn(true)
@@ -34,7 +33,7 @@ function Nav() {
           <NavLinks/>
           : 
           <div className="login-signup">
-            <Link to={'/user/login'} ><button className="nav-butt login-butt">Login</button></Link>
+            <Link to={'/user/login'} state={{lastPage: location.pathname + location.search}}><button className="nav-butt login-butt">Login</button></Link>
             <Link to={'/user/signup'} ><button className="nav-butt signup-butt">Signup</button></Link>
           </div>
         }

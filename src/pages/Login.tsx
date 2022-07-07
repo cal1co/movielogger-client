@@ -2,6 +2,8 @@ import * as react from 'react'
 import axios from 'axios'
 import { useState } from 'react'
 import URLS from '../api/server'
+import { useNavigate, useLocation } from 'react-router-dom'
+
 
 function Login() {
 
@@ -9,6 +11,8 @@ function Login() {
     const [password, setPassword] = useState('')
     const [disable, setDisable] = useState(true)
     const [errorMsg, setErrorMsg] = useState(Object)
+    const navigate = useNavigate()
+    const location:any = useLocation()
 
     const emailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
@@ -22,31 +26,39 @@ function Login() {
     }
 
     const checkDisable = () => {
-        let emailField = document.getElementById("email-box")
-        let passField = document.getElementById("pass-box")
+        let emailField = document.getElementById("email-box") as HTMLInputElement
+        let passField = document.getElementById("pass-box") as HTMLInputElement
         // console.log(emailField.value, passField.value)
-        if (emailField.value && passField.value){
-            console.log("DISABLE NOW")
+        if (emailField!.value && passField!.value){
+            // console.log("DISABLE NOW")
             setDisable(false)
         } else {
             setDisable(true)
         }
     }
     const submitLogin = async () => {
+        setDisable(true)
         const url = URLS.BASE + URLS.LOGIN;
-        const setHeader = {"Access-Control-Allow-Origin": location.origin}
+        const setHeader = {"Access-Control-Allow-Origin": "*"}
         return axios.post(url, {email, password}, {headers: setHeader})
         .then((res) => {
-            console.log('res:', res.data)
+            // console.log('res:', res.data)
             const { token, id, name } = res.data
             localStorage.setItem('currentUserToken', token)
             localStorage.setItem('currentUserId', id)
             localStorage.setItem('currentUsername', name)
             localStorage.setItem('currentUser', JSON.stringify(res.data))
+            if (location.state.lastPage){
+                navigate(location.state.lastPage)
+            } else {
+                navigate(`/${name}`)
+            }
+            console.log(location)
         })
         .catch((err) => { // how to add a response? 
-            console.error(err.response.data)
+            // console.error(err.response.data)
             setErrorMsg(err.response.data)
+            setDisable(false)
         })
     }
     const renderError = () => {
@@ -76,7 +88,7 @@ function Login() {
                 <form className="login-form" onSubmit={submitLogin}>
                     <input className="email" id="email-box" placeholder={"email"} onChange={emailInput}/>
                     <input className="password" id="pass-box" placeholder={"password"} onChange={passwordInput}/>
-                    <button disabled={disable}type="submit">login</button>
+                    <button disabled={disable}type="submit">LOGIN</button>
                 </form>
             </div>
         </div>

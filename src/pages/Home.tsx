@@ -38,7 +38,7 @@ function Home() {
     const getTopFilms = async () => {
         await axios.get(URLS.TOP_RATED)
         .then((res) => {
-            console.log(res.data.results)
+            // console.log(res.data.results)
             setTopData(res.data.results)
         })
         .catch((err) => {
