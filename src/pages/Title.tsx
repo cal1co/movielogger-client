@@ -128,7 +128,7 @@ function Title() {
 
                             <div className="where-to-watch">
                                 <p className="where-title">
-                                    Available to watch:
+                                    Wnere to watch:
                                 </p>
                                 <div className="where-stream">
                                     {
