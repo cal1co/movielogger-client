@@ -6,7 +6,6 @@ import { useNavigate, useLocation } from 'react-router-dom'
 
 
 function Login() {
-
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [disable, setDisable] = useState(true)
@@ -87,8 +86,8 @@ function Login() {
 
                 <form className="login-form" onSubmit={submitLogin}>
                     <input className="email" id="email-box" placeholder={"email"} onChange={emailInput}/>
-                    <input className="password" id="pass-box" placeholder={"password"} onChange={passwordInput}/>
-                    <button disabled={disable}type="submit">LOGIN</button>
+                    <input type="password" className="password" id="pass-box" placeholder={"password"} onChange={passwordInput}/>
+                    <button disabled={disable} type="submit">LOGIN</button>
                 </form>
             </div>
         </div>

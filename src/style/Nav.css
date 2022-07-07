@@ -120,3 +120,14 @@
     border-radius:1em;
     /* transform:translateY(50%) */
 }
+.Signup{
+    position:relative;
+    /* top:50%; */
+    display:grid;
+    justify-content:center;
+    justify-items:center;
+
+}
+.signup-elem{
+    height:3em;
+}
