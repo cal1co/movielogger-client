@@ -4,7 +4,6 @@ import axios from 'axios'
 import '../style/User.css'
 import URLS from '../api/server'
 
-// const TEST_URL = 'http://localhost:8080/user/'
 const header = {"Access-Control-Allow-Origin": "*"}
 
 function User() {
@@ -16,12 +15,13 @@ function User() {
     const [followingCount, setFollowingCount] = useState(0)
     const [avatar, setAvatar] = useState(Object)
     const [followed, setFollowed] = useState(false)
-    const [ratingSelect, setRatingSelect] = useState(true) // ADD A LITTLE LINE UNDER SELECTED
+    const [ratingSelect, setRatingSelect] = useState(true) 
     const [watchedSelect, setWatchedSelect] = useState(false)
     const [watchlistSelect, setWatchlistSelect] = useState(false)
     const [likedSelect, setLikedSelect] = useState(false)
     const location = useLocation()
-
+    
+    // TODO: ADD A LITTLE LINE UNDER SELECTED // TURN PROFILE BIO INTO GRID TO BETTER PLACE ITEMS
 
     useEffect(() => {
         getUserData()
@@ -115,13 +115,19 @@ function User() {
     }
 
     const renderRatings = () => {
-        console.log(user.ratings)
-        return user.ratings.map((elem:any, idx:number) => {
-            return <div className="rating-item" id={`${idx}`}>
-                {elem.rating} {elem.film.title}
+        // console.log(user.ratings)
+        if (user.ratings.length >= 1){
+            // console.log("This user has no ratings")
+            return <div>This user has no ratings</div>
+        } else {
+            return user.ratings.map((elem:any, idx:number) => {
+                return <div className="rating-item" id={`${idx}`}>
+                    {elem.rating} {elem.film.title}
+    
+                </div>
+            })
 
-            </div>
-        })
+        }
     }
 
     const selectSection = (tab:number) => {
