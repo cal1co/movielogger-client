@@ -13,6 +13,7 @@ function Title() {
     const [backdropLoaded, setBackdropLoaded] = useState(false)
     const [services, setServices] = useState(Object)
     const [fetchedServices, setFetchedServices] = useState(false)
+    const [rating, setRating] = useState(0)
     const location:any = useLocation()
 
 
@@ -103,6 +104,7 @@ function Title() {
 
     const rateTitle = (newRating:any) => {
         console.log("CHANGED", newRating)
+        setRating(newRating)
     }
 
     return (
@@ -131,7 +133,7 @@ function Title() {
                         
                         
                         
-                        <StarRatings changeRating={rateTitle} rating={0} starEmptyColor="grey" starHoverColor="orange" starRatedColor="orange" starDimension="2em" starSpacing="0.5em" />
+                        <StarRatings changeRating={rateTitle} rating={rating} starEmptyColor="grey" starHoverColor="orange" starRatedColor="orange" starDimension="2em" starSpacing="0.5em" />
                         
                         
                         
