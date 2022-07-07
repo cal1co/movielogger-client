@@ -56,7 +56,9 @@ function Signup() {
             localStorage.setItem('currentUserId', id)
             localStorage.setItem('currentUserName', name)
             localStorage.setItem('currentUser', JSON.stringify(res.data))
-            if (location!.state.lastPage){
+            console.log(res.data)
+            console.log(JSON.parse(localStorage.getItem('currentUser') || '{}'))
+            if (location!.state.lastPage !== "/user/login"){
                 navigate(location.state.lastPage)
             } else {
                 navigate(`/${name}`)

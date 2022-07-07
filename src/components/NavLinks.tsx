@@ -33,7 +33,7 @@ function NavLinks() {
                     @{name}
                 </div> */}
 
-            <button className="logout-butt" onClick={logout}>
+            <button className="logout-butt nav-butt" onClick={logout}>
                 LOGOUT
             </button>
 
