@@ -16,6 +16,7 @@
     "react-router": "^6.3.0",
     "react-router-dom": "^6.3.0",
     "react-router-hash-link": "^2.4.3",
+    "react-star-ratings": "^2.3.0",
     "react-test-renderer": "^18.2.0"
   },
   "devDependencies": {
