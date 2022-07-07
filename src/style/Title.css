@@ -32,9 +32,8 @@
     /* top:50%; */
     left:50%;
     transform:translateX(-50%);
-    width:25vw;
-    min-width:135px;
-    height:auto;
+    width:auto;
+    height:45vh;
     border-radius:0.25rem;
     border:2px solid white;
 }
