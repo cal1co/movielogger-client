@@ -85,3 +85,10 @@
     left: 50%;
     transform:translateX(-50%)
 }
+.star-container{
+    /* width:3em; */
+}
+/* .widget-svg{
+    width:30px; 
+    height:30px;
+} */
