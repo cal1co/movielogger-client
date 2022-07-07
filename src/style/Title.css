@@ -14,8 +14,9 @@
 
 .backdrop{
     position:fixed;
-    /* width:100vw; */
-    max-height:80vh;
+    width:100vw;
+    height:80vh;
+    object-fit:cover;
     background-size:cover;
     background-repeat:no-repeat;
     /* background-position:center; */
