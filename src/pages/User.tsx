@@ -116,9 +116,9 @@ function User() {
 
     const renderRatings = () => {
         console.log(user.ratings)
-        return user.ratings.map((film:any, idx:number) => {
+        return user.ratings.map((elem:any, idx:number) => {
             return <div className="rating-item" id={`${idx}`}>
-                {film.rating}
+                {elem.rating} {elem.film.title}
 
             </div>
         })
@@ -216,7 +216,7 @@ function User() {
                     </div>
                     <div className="tab-contents">
                         <div className="user-ratings" style={{display: ratingSelect ? 'contents' : 'none'}}>
-                            ratings
+                            {renderRatings()}
                         </div>
                         <div className="user-watched" style={{display: watchedSelect ? 'contents' : 'none'}}>
                             watched
