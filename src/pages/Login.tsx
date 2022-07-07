@@ -12,6 +12,7 @@ function Login() {
     const [errorMsg, setErrorMsg] = useState(Object)
     const navigate = useNavigate()
     const location:any = useLocation()
+    console.log(location)
 
     const emailInput = (event: React.ChangeEvent<HTMLInputElement>) => {
         event.preventDefault()
@@ -47,7 +48,7 @@ function Login() {
             localStorage.setItem('currentUserId', id)
             localStorage.setItem('currentUsername', name)
             localStorage.setItem('currentUser', JSON.stringify(res.data))
-            if (location.state.lastPage){
+            if (location!.state !== null){
                 navigate(location.state.lastPage)
             } else {
                 navigate(`/${name}`)
