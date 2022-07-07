@@ -53,7 +53,6 @@ function Login() {
             } else {
                 navigate(`/${name}`)
             }
-            console.log(location)
         })
         .catch((err) => { // how to add a response? 
             // console.error(err.response.data)
