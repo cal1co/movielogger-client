@@ -115,8 +115,8 @@ function User() {
     }
 
     const renderRatings = () => {
-        // console.log(user.ratings)
-        if (user.ratings.length >= 1){
+        console.log(user.ratings)
+        if (user.ratings.length <= 1){
             // console.log("This user has no ratings")
             return <div>This user has no ratings</div>
         } else {
