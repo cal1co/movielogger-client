@@ -109,7 +109,6 @@ function Title() {
             setUserPresent(true)
             return true
         } else {
-
             return false
         }
     }
@@ -130,7 +129,7 @@ function Title() {
             await axios.post(url, {user, rating:newRating, filmInfo:{filmData}})
             .then((res) => {
                 localStorage.removeItem('currentUser')
-                localStorage.setItem('currentUser', res.data)
+                localStorage.setItem('currentUser', JSON.stringify(res.data))
             })
             .catch((err) => {
                 console.error(err)
