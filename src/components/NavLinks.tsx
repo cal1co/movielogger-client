@@ -28,11 +28,13 @@ function NavLinks() {
                 <svg className="nav-img" style={{backgroundColor: avatar.color}} height='128px' width='128px'>
                         <image className="nav-img" href={avatar.image}></image> 
                 </svg>
-                @{name}
             </Link>
+                {/* <div className="nav-name">
+                    @{name}
+                </div> */}
 
             <button className="logout-butt" onClick={logout}>
-                logout
+                LOGOUT
             </button>
 
         </div>
