@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import URLS from '../api/movieApi'
+import serverURLS from '../api/server'
 import StarRatings from 'react-star-ratings'
 
 
@@ -13,13 +14,16 @@ function Title() {
     const [backdropLoaded, setBackdropLoaded] = useState(false)
     const [services, setServices] = useState(Object)
     const [fetchedServices, setFetchedServices] = useState(false)
+    const [userPresent, setUserPresent] = useState(false)
     const [rating, setRating] = useState(0)
     const location:any = useLocation()
 
 
     useEffect(() => {
         getTitleData()
-        console.log('location', location)
+        if (loggedIn()){
+            checkExistingRating()
+        }
     }, [filmId])
 
     const getTitleData = async () => {
@@ -49,7 +53,6 @@ function Title() {
         await getServices(filmId)
         setLoading(false)
     }
-   
     const getServices = async (input:number) => {
         if (input !== 0){
             // console.log(input)
@@ -65,7 +68,6 @@ function Title() {
             })
         }
     }
-
     const getCredits = async (input:number) => {
         await axios.get(URLS.HEAD + input + URLS.CREDITS + URLS.KEY)
         .then((res) => {
@@ -75,8 +77,6 @@ function Title() {
             console.error(err)
         })
     }
-
-
     const renderStreamingPlatforms = () => {
         // let streaming = services.flatrate
         if (services !== undefined){
@@ -89,7 +89,6 @@ function Title() {
             })
         }
     }
-
     const renderPurchasePlatforms = () => {
         if (services !== undefined){
             return services.rent.map((service: any, idx: number) => {
@@ -103,9 +102,40 @@ function Title() {
         }
     }
 
-    const rateTitle = (newRating:any) => {
-        console.log("CHANGED", newRating)
+    const loggedIn = () => {
+        const user = localStorage!.getItem('currentUser') 
+        console.log(user)
+        if (user !== null){
+            setUserPresent(true)
+            return true
+        } else {
+
+            return false
+        }
+    }
+    const checkExistingRating = () => {
+        const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
+        user.ratings.forEach((e:any) => {
+            if (e.film.id === filmId){
+                console.log("THIS FILM HAS BEEN RATED!!")
+            }
+        })
+    }
+    const rateTitle = async (newRating:any) => {
         setRating(newRating)
+        if (userPresent){
+            const url = serverURLS.BASE + serverURLS.USER + 'rate'
+            const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
+    
+            await axios.post(url, {user, rating:newRating, filmInfo:{filmData}})
+            .then((res) => {
+                localStorage.removeItem('currentUser')
+                localStorage.setItem('currentUser', res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+        }
     }
 
     return (
@@ -134,7 +164,7 @@ function Title() {
                         <div className="rating-stars">
                             <div className="user-stars">
                                 {/* User Score: */}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="user-star" id="iconContext-star" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path></svg>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="user-star" id="iconContext-star" viewBox="0 0 24 24" fill="orange" role="presentation"><path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path></svg>
                                 {filmData.vote_average / 2}/5 · {filmData.vote_count}
                             </div>
                             

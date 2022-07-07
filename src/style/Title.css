@@ -82,7 +82,9 @@
     top:-3%;
     cursor:pointer;
 }
-
+.service-platform:active{
+    top:0%;
+}
 .platforms > div > *{
     display:inline-block;
     padding-left:10px;
