@@ -104,7 +104,6 @@ function Title() {
 
     const loggedIn = () => {
         const user = localStorage!.getItem('currentUser') 
-        console.log(user)
         if (user !== null){
             setUserPresent(true)
             return true
@@ -112,11 +111,12 @@ function Title() {
             return false
         }
     }
+
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
         user.ratings.forEach((e:any) => {
             if (e.film.id === filmId){
-                console.log("THIS FILM HAS BEEN RATED!!")
+                setRating(e.rating)
             }
         })
     }
@@ -125,7 +125,6 @@ function Title() {
         if (userPresent){
             const url = serverURLS.BASE + serverURLS.USER + 'rate'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-    
             await axios.post(url, {user, rating:newRating, filmInfo:{filmData}})
             .then((res) => {
                 localStorage.removeItem('currentUser')
