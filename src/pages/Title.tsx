@@ -115,6 +115,7 @@ function Title() {
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
         user.ratings.forEach((e:any) => {
+            // console.log(filmId, e.film.id)
             if (e.film.id === filmId){
                 setRating(e.rating)
             }
