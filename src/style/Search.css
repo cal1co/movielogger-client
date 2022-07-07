@@ -136,3 +136,10 @@
     color:white;
     text-decoration:none;
 }
+
+
+.user-result-profile-img{
+    border-radius:10em;
+    height:5em;
+    width:auto;
+}

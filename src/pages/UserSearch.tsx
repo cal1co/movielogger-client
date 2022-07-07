@@ -40,11 +40,11 @@ function UserSearch() {
 
                     <div className="user-result-avi">
                         <svg className="user-result-profile-img" style={{backgroundColor: JSON.parse(user.avatar).color}} height='128px' width='128px'>
-                            <image href={JSON.parse(user.avatar).image}></image> 
+                            <image className="user-result-profile-img" href={JSON.parse(user.avatar).image}></image> 
                         </svg>
                     </div>
                     <div className="user-result-username">
-                        {user.username}
+                        @{user.username}
                     </div>
                 </Link>
 
