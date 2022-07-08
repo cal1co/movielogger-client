@@ -17,7 +17,7 @@
 
 
 .backdrop{
-    position:fixed;
+    position:absolute;
     width:100vw;
     height:80vh;
     object-fit:cover;
@@ -153,4 +153,11 @@ polygon{
     position:relative;
     left:50%;
     transform:translateX(-50%)
+}
+
+.cast-img{
+    object-fit:cover;
+    border-radius:50%;
+    height:120px;
+    width:120px;;
 }
