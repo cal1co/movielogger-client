@@ -113,9 +113,17 @@ function Title() {
             // return <div className="hi">hi</div>
             return castInfo.cast.map((person:any, idx:number) => {
                 return <div className="">
-                    <div className="cast-img-wrapper">
-                    <img className="cast-img" src={URLS.POSTER + person.profile_path}/>
+                    {
+                    idx < 5 
+                    ? 
+                    
+                    <div className="cast-img-wrapper" id={`${idx}`}>
+                    <img className="cast-img" src={URLS.POSTER + person.profile_path}/> 
                     </div>
+                    : 
+                    <p></p>
+                    }
+                    
                 </div>
             })
             }
@@ -152,7 +160,9 @@ function Title() {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
         user.films.forEach((e:any) => {
             if (e.id === filmId){
+                console.log("LOOK HERE", e)
                 if (e.watchlist){
+
                     setWatchlist(true)
                 }
             }
@@ -221,11 +231,11 @@ function Title() {
                                         <polygon className="watchlist-ribbon-body-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
 
                                     </svg>
-                                    <div className="watchlist-ribbon-icon" role="presentation" style={{display: watchlist ? 'none' : 'contents'}}>
+                                    <div className="watchlist-ribbon-icon" role="presentation" style={{display: watchlist ? 'contents' : 'none'}}>
                                         <svg width="24" height="24" className="watchlist-ribbon-icon" fill="currentColor"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M9 16.2l-3.5-3.5a.984.984 0 0 0-1.4 0 .984.984 0 0 0 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7a.984.984 0 0 0 0-1.4.984.984 0 0 0-1.4 0L9 16.2z"></path></svg>
                                     </div>
 
-                                    <div className="watchlist-ribbon-icon" role="presentation" style={{display: watchlist ? 'contents' : 'none'}}>
+                                    <div className="watchlist-ribbon-icon" role="presentation" style={{display: watchlist ? 'none' : 'contents'}}>
                                         <svg className="watchlist-ribbon-icon" viewBox="0 0 24 24" fill="currentColor" >
                                             <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path>
                                         </svg>
