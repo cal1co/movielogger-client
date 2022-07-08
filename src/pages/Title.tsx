@@ -15,7 +15,7 @@ function Title() {
     const [services, setServices] = useState(Object)
     const [fetchedServices, setFetchedServices] = useState(false)
     const [userPresent, setUserPresent] = useState(false)
-    const [rating, setRating] = useState(false)
+    const [rating, setRating] = useState(0)
     const [liked, setLiked] = useState(false)
     const [watched, setWatched] = useState(false)
     const [watchlist, setWatchlist] = useState(false)
@@ -131,6 +131,10 @@ function Title() {
         updateUserFilmData(newRating)
     }
     const updateUserFilmData = async (rateNum=rating) => {
+        let sendRating:any = rateNum
+        if (sendRating === 0){
+            sendRating = false
+        } 
         if (userPresent){
             const url = serverURLS.BASE + serverURLS.USER + 'film'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -144,15 +148,6 @@ function Title() {
             .catch((err) => {
                 console.error(err)
             })
-        }
-    }
-
-    const handleRating = () => {
-        if (!rating){
-            return 0
-        } else {
-            const rateNum = rating
-            return rateNum
         }
     }
 
@@ -177,7 +172,7 @@ function Title() {
                     <div className="title-block" key={filmData.id} style={{display: backdropLoaded ? 'grid' : 'none'}}>
                         <img className="title-img" src={URLS.POSTER + filmData.poster_path}/>
                         <img className="backdrop" src={URLS.BACKDROP + filmData.backdrop_path} onLoad={() => setBackdropLoaded(true)}/>
-                        
+                        <div className="ipc-watchlist-ribbon ipc-focusable ipc-watchlist-ribbon--l ipc-watchlist-ribbon--baseAlt ipc-watchlist-ribbon--onImage ipc-poster__watchlist-ribbon hero-media__watchlist" aria-label="add to watchlist" role="button" ><svg className="ipc-watchlist-ribbon__bg" width="24px" height="34px" viewBox="0 0 24 34" xmlns="http://www.w3.org/2000/svg" role="presentation"><polygon className="ipc-watchlist-ribbon__bg-ribbon" fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon><polygon className="ipc-watchlist-ribbon__bg-hover" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon><polygon className="ipc-watchlist-ribbon__bg-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon></svg><div className="ipc-watchlist-ribbon__icon" role="presentation"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" className="ipc-icon ipc-icon--add ipc-icon--inline" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path></svg></div></div>
 
                         <div className="rating-stars">
                             <div className="user-stars">
@@ -186,7 +181,7 @@ function Title() {
                                 {filmData.vote_average / 2}/5 · {filmData.vote_count}
                             </div>
                             
-                            <StarRatings changeRating={rateTitle} rating={handleRating()} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/>
+                            <StarRatings changeRating={rateTitle} rating={rating} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/>
                         </div>
                         
                             <p className="title-name">{filmData.original_title}</p>
