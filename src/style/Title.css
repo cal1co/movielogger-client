@@ -4,7 +4,6 @@
     grid-template-rows:10vh 47.5vh;
     grid-template-columns: 40vw;
     justify-content:center;
-    /* align-items:center; */
     /* grid-template-rows: repeat(2, 0.5fr); */
     grid-template-areas:
     "title-area title"
@@ -12,7 +11,7 @@
     "rating movie-info"
 }
 .title-name{ grid-area: title-area }
-.title-img{ grid-area: poster-side; }
+.poster-rapper{ grid-area: poster-side; }
 .filmData-info{ grid-area: movie-info; }
 .rating-stars{ grid-area: rating; }
 
@@ -26,17 +25,6 @@
     background-repeat:no-repeat;
     z-index:-1;
     filter:blur(0.0rem) invert(20%) sepia(96%) saturate(2717%) hue-rotate(219deg) brightness(75%) contrast(97%)
-}
-
-.title-img{
-    position:relative;
-    z-index:99999999; 
-    left:50%;
-    transform:translateX(-50%);
-    width:auto;
-    height:45vh;
-    border-radius:0.25rem;
-    border:2px solid white;
 }
 
 .title-name{
@@ -109,7 +97,54 @@
 .star-ratings{
     left:50%;
     transform:translateX(-50%)
+}
+
+.watchlist-ribbon{
+    width:2em;
+    height:3em;
+    z-index:999;
+    position:relative;
+    left:5px;
+}
+polygon{
+    background-color:rgba(0, 0, 0, 0.212);
+}
+.watchlist-ribbon > * {
+    border-radius:0.3em 0 0 0;
+    position:absolute;
+}
+
+.watchlist-ribbon-body{
+    height:3em;
+    width:2em;
+}
+.watchlist-ribbon-icon{
+    width:1.75em;
+    height:1.75em;
     /* display:flex; */
-    /* justify-items:center; */
     /* justify-content:center; */
+    /* justify-items:center; */
+    position:relative;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
+}
+
+.title-img{
+    /* position:relative; */
+    position:fixed;
+    z-index:0; 
+    /* left:50%; */
+    /* transform:translateX(-50%); */
+    width:auto;
+    height:45vh;
+    border-radius:0.25rem;
+    border:2px solid white;
+}
+.poster-rapper{
+    /* height:fit-content; */
+    width:30vh;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%)
 }
