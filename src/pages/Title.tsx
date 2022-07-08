@@ -126,10 +126,14 @@ function Title() {
     }
     const rateTitle = async (newRating:any) => {
         setRating(newRating)
+        updateUserFilmData()
+    }
+    const updateUserFilmData = async () => {
         if (userPresent){
             const url = serverURLS.BASE + serverURLS.USER + 'rate'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-            await axios.post(url, {user, rating:newRating, filmInfo:{filmData}, liked, watched, watchlist})
+            const filmObj = {user, rating, filmInfo:{filmData}, liked, watched, watchlist}
+            await axios.post(url, filmObj)
             .then((res) => {
                 localStorage.removeItem('currentUser')
                 localStorage.setItem('currentUser', JSON.stringify(res.data))
