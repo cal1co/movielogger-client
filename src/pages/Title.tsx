@@ -26,6 +26,7 @@ function Title() {
         getTitleData()
         if (loggedIn()){
             checkExistingRating()
+            checkExistingWatchlist()
         }
     }, [filmId])
 
@@ -126,11 +127,32 @@ function Title() {
             }
         })
     }
-    const rateTitle = async (newRating:any) => {
+    const rateTitle = (newRating:any) => {
         setRating(newRating)
         updateUserFilmData(newRating)
     }
-    const updateUserFilmData = async (rateNum=rating) => {
+
+    const checkExistingWatchlist = () => {
+        const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
+        user.films.forEach((e:any) => {
+            if (e.id === filmId){
+                if (e.watchlist){
+                    setWatchlist(true)
+                }
+            }
+        })
+    }
+    const addToWatchlist = () => {
+        if (watchlist){
+            setWatchlist(false)
+            updateUserFilmData(rating, false)
+        } else {
+            setWatchlist(true)
+            updateUserFilmData(rating, true)
+        }
+    }
+
+    const updateUserFilmData = async (rateNum=rating, addWatchlist=watchlist) => {
         let sendRating:any = rateNum
         if (sendRating === 0){
             sendRating = false
@@ -138,7 +160,7 @@ function Title() {
         if (userPresent){
             const url = serverURLS.BASE + serverURLS.USER + 'film'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-            const filmObj = {user, rating: rateNum, filmInfo:{filmData}, liked, watched, watchlist}
+            const filmObj = {user, rating: rateNum, filmInfo:{filmData}, liked, watched, watchlist:addWatchlist}
             console.log("FILM OBJECT!!!!", filmObj)
             await axios.post(url, filmObj)
             .then((res) => {
@@ -168,21 +190,31 @@ function Title() {
                     </div>
                     
                     <div className="title-block" key={filmData.id} style={{display: backdropLoaded ? 'grid' : 'none'}}>
-                        
+
                         <div className="poster-rapper">
-                            <img className="title-img" src={URLS.POSTER + filmData.poster_path}/>
-                            <div className="watchlist-ribbon">
-                                <svg className="watchlist-ribbon-body" viewBox="0 0 24 34" >
-                                    <polygon className="watchlist-ribbon-body" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                    <polygon className="watchlist-ribbon-body" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                    <polygon className="watchlist-ribbon-body-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
-                                </svg>
-                                <div className="watchlist-ribbon-icon" role="presentation">
-                                    <svg className="watchlist-ribbon-icon" viewBox="0 0 24 24" fill="currentColor" role="presentation">
-                                        <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path>
+                            <img className="title-img" src={URLS.POSTER + filmData.poster_path} alt={`poster for: ${filmData.title}`}/>
+                            <abbr title="ADD TO WATCHLIST">
+                                <div className="watchlist-ribbon" onClick={addToWatchlist}>
+
+
+                                    <svg className="watchlist-ribbon-body" viewBox="0 0 24 34">
+                                        <polygon className="watchlist-ribbon-body" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
+                                        <polygon className="watchlist-ribbon-body" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
+                                        <polygon className="watchlist-ribbon-body-shadow" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
+
                                     </svg>
+                                    <div className="watchlist-ribbon-icon" role="presentation" style={{display: watchlist ? 'none' : 'contents'}}>
+                                        <svg width="24" height="24" className="watchlist-ribbon-icon"><path fill="none" d="M0 0h24v24H0V0z"></path><path d="M9 16.2l-3.5-3.5a.984.984 0 0 0-1.4 0 .984.984 0 0 0 0 1.4l4.19 4.19c.39.39 1.02.39 1.41 0L20.3 7.7a.984.984 0 0 0 0-1.4.984.984 0 0 0-1.4 0L9 16.2z"></path></svg>
+                                    </div>
+
+                                    <div className="watchlist-ribbon-icon" role="presentation" style={{display: watchlist ? 'contents' : 'none'}}>
+                                        <svg className="watchlist-ribbon-icon" viewBox="0 0 24 24" fill="currentColor" role="presentation">
+                                            <path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path>
+                                        </svg>
+                                    </div>
                                 </div>
-                            </div>
+                            </abbr>
+
                         </div>
 
                         <img className="backdrop" src={URLS.BACKDROP + filmData.backdrop_path} onLoad={() => setBackdropLoaded(true)}/>

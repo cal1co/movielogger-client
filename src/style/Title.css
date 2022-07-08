@@ -117,6 +117,7 @@ polygon{
 .watchlist-ribbon-body{
     height:3em;
     width:2em;
+    fill:rgba(0, 0, 0, 0.404)
 }
 .watchlist-ribbon-icon{
     width:1.75em;
@@ -129,20 +130,25 @@ polygon{
     top:45%;
     transform:translate(-50%,-50%);
 }
+.watchlist-ribbon:hover{
+    cursor:pointer;
+}
+.watchlist-ribbon:hover .watchlist-ribbon-body{
+    fill:rgba(0, 0, 0, 0.589);
+}
+.watchlist-ribbon:hover .watchlist-ribbon-icon{
+    fill:rgb(248, 248, 248);
+}
 
 .title-img{
-    /* position:relative; */
     position:fixed;
     z-index:0; 
-    /* left:50%; */
-    /* transform:translateX(-50%); */
     width:auto;
     height:45vh;
     border-radius:0.25rem;
     border:2px solid white;
 }
 .poster-rapper{
-    /* height:fit-content; */
     width:30vh;
     position:relative;
     left:50%;
