@@ -15,7 +15,7 @@ function Title() {
     const [services, setServices] = useState(Object)
     const [fetchedServices, setFetchedServices] = useState(false)
     const [userPresent, setUserPresent] = useState(false)
-    const [rating, setRating] = useState(0)
+    const [rating, setRating] = useState(false)
     const [liked, setLiked] = useState(false)
     const [watched, setWatched] = useState(false)
     const [watchlist, setWatchlist] = useState(false)
@@ -117,22 +117,25 @@ function Title() {
 
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        user.ratings.forEach((e:any) => {
+        user.films.forEach((e:any) => {
             // console.log(filmId, e.film.id)
-            if (e.film.id === filmId){
-                setRating(e.rating)
+            if (e.id === filmId){
+                if (e.rating){
+                    setRating(e.rating)
+                }
             }
         })
     }
     const rateTitle = async (newRating:any) => {
         setRating(newRating)
-        updateUserFilmData()
+        updateUserFilmData(newRating)
     }
-    const updateUserFilmData = async () => {
+    const updateUserFilmData = async (rateNum=rating) => {
         if (userPresent){
-            const url = serverURLS.BASE + serverURLS.USER + 'rate'
+            const url = serverURLS.BASE + serverURLS.USER + 'film'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-            const filmObj = {user, rating, filmInfo:{filmData}, liked, watched, watchlist}
+            const filmObj = {user, rating: rateNum, filmInfo:{filmData}, liked, watched, watchlist}
+            console.log("FILM OBJECT!!!!", filmObj)
             await axios.post(url, filmObj)
             .then((res) => {
                 localStorage.removeItem('currentUser')
@@ -141,6 +144,15 @@ function Title() {
             .catch((err) => {
                 console.error(err)
             })
+        }
+    }
+
+    const handleRating = () => {
+        if (!rating){
+            return 0
+        } else {
+            const rateNum = rating
+            return rateNum
         }
     }
 
@@ -174,7 +186,7 @@ function Title() {
                                 {filmData.vote_average / 2}/5 · {filmData.vote_count}
                             </div>
                             
-                            <StarRatings changeRating={rateTitle} rating={rating} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/>
+                            <StarRatings changeRating={rateTitle} rating={handleRating()} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"/>
                         </div>
                         
                             <p className="title-name">{filmData.original_title}</p>

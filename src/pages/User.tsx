@@ -8,6 +8,7 @@ const header = {"Access-Control-Allow-Origin": "*"}
 
 function User() {
     const [user, setUser] = useState(Object)
+    const [userRatings, setRatings] = useState(Array)
     const [userLoaded, setUserLoaded] = useState(false)
     const [currUserLoggedIn, setCurrUserLoggedIn] = useState(false)
     const [currUser, setCurrUser] = useState(Object)
@@ -52,6 +53,17 @@ function User() {
                 const avi = JSON.parse(res.data.avatar)
                 setAvatar(avi)
                 setUser(res.data)
+                const ratedTitles:any = []
+                res.data.films.forEach((e:any) => {
+                    const tempObj = {
+                        id: e.id,
+                        poster: e.poster,
+                        rating: e.rating,
+                        title: e.title
+                    }
+                    ratedTitles.push(tempObj)
+                })
+                setRatings(ratedTitles)
                 setFollowerCount(res.data.followers.length)
                 setFollowingCount(res.data.following.length)
                 checkFollow(res.data)
@@ -115,15 +127,15 @@ function User() {
     }
 
     const renderRatings = () => {
-        console.log(user.ratings)
-        if (user.ratings.length <= 1){
+        console.log(userRatings)
+        if (userRatings.length <= 1){
             // console.log("This user has no ratings")
             return <div>This user has no ratings</div>
         } else {
-            return user.ratings.map((elem:any, idx:number) => {
+            return userRatings.map((elem:any, idx:number) => {
                 return <div className="rating-item" id={`${idx}`}>
-                    <Link to={`/title/show?id=${elem.film.id}`}>
-                        {elem.rating} {elem.film.title}
+                    <Link to={`/title/show?id=${elem.id}`}>
+                        {elem.rating} {elem.title}
                     </Link>
     
                 </div>
@@ -224,7 +236,7 @@ function User() {
                     </div>
                     <div className="tab-contents">
                         <div className="user-ratings" style={{display: ratingSelect ? 'contents' : 'none'}}>
-                        {user.ratings.length} Ratings: {renderRatings()}
+                        {userRatings.length} Ratings: {renderRatings()}
                         </div>
                         <div className="user-watched" style={{display: watchedSelect ? 'contents' : 'none'}}>
                             watched
