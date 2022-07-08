@@ -16,6 +16,9 @@ function Title() {
     const [fetchedServices, setFetchedServices] = useState(false)
     const [userPresent, setUserPresent] = useState(false)
     const [rating, setRating] = useState(0)
+    const [liked, setLiked] = useState(false)
+    const [watched, setWatched] = useState(false)
+    const [watchlist, setWatchlist] = useState(false)
     const location:any = useLocation()
 
 
@@ -126,7 +129,7 @@ function Title() {
         if (userPresent){
             const url = serverURLS.BASE + serverURLS.USER + 'rate'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
-            await axios.post(url, {user, rating:newRating, filmInfo:{filmData}})
+            await axios.post(url, {user, rating:newRating, filmInfo:{filmData}, liked, watched, watchlist})
             .then((res) => {
                 localStorage.removeItem('currentUser')
                 localStorage.setItem('currentUser', JSON.stringify(res.data))

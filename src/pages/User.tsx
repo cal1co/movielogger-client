@@ -224,7 +224,7 @@ function User() {
                     </div>
                     <div className="tab-contents">
                         <div className="user-ratings" style={{display: ratingSelect ? 'contents' : 'none'}}>
-                            {renderRatings()}
+                        {user.ratings.length} Ratings: {renderRatings()}
                         </div>
                         <div className="user-watched" style={{display: watchedSelect ? 'contents' : 'none'}}>
                             watched
