@@ -7,6 +7,7 @@ import Title from './pages/Title'
 import User from './pages/User'
 import SearchResults from './pages/SearchResults'
 import UserSearch from './pages/UserSearch'
+import Message from './pages/Message'
 
 function Routers (){
 
@@ -14,6 +15,7 @@ function Routers (){
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/:id" element={<User />} />
+            <Route path="/messages/:id" element={<Message />} />
             <Route path="/user/login" element={<Login />} />
             <Route path="/user/signup" element={<Signup />} />
             <Route path="/user/search" element={<UserSearch />} />

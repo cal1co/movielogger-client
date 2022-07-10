@@ -23,14 +23,10 @@ function Title() {
     const [castInfo, setCastInfo] = useState(Object)
     const location:any = useLocation()
     // const socket = io()
-    const socket = io(serverURLS.BASE_TEST)
 
 
     useEffect(() => {
         getTitleData()
-        socket.on('connect', () => {
-            console.log('connected to socket!')
-        })
         if (loggedIn()){
             checkExistingRating()
             checkExistingWatchlist()
