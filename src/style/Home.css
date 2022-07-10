@@ -118,11 +118,11 @@ body{
 }
 .left{
   border-left:none;
-  left:-1.5%;
+  left:-0.5rem;
 }
 .right{
   border-right:none;
-  right:-1.5%;
+  right:-0.5rem;
 }
 .scroll-arrow{
   fill:white;
