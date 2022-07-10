@@ -142,6 +142,7 @@ function Title() {
 
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
+        console.log('existing rating', user)
         user.films.forEach((e:any) => {
             // console.log(filmId, e.film.id)
             if (e.id === filmId){
@@ -158,6 +159,7 @@ function Title() {
 
     const checkExistingWatchlist = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
+        console.log('existing', user)
         user.films.forEach((e:any) => {
             if (e.id === filmId){
                 console.log("LOOK HERE", e)
