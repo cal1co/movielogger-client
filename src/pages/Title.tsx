@@ -5,6 +5,7 @@ import axios from 'axios'
 import URLS from '../api/movieApi'
 import serverURLS from '../api/server'
 import StarRatings from 'react-star-ratings'
+import { io } from 'socket.io-client'
 
 
 function Title() {
@@ -21,14 +22,20 @@ function Title() {
     const [watchlist, setWatchlist] = useState(false)
     const [castInfo, setCastInfo] = useState(Object)
     const location:any = useLocation()
+    // const socket = io()
+    const socket = io(serverURLS.BASE_TEST)
 
 
     useEffect(() => {
         getTitleData()
+        socket.on('connect', () => {
+            console.log('connected to socket!')
+        })
         if (loggedIn()){
             checkExistingRating()
             checkExistingWatchlist()
         }
+
     }, [filmId])
 
     const getTitleData = async () => {
@@ -108,7 +115,7 @@ function Title() {
         }
     }
     const renderCastInfo = () => {
-        console.log(castInfo)
+        // console.log(castInfo)
         if (castInfo !== undefined){
             // return <div className="hi">hi</div>
             return castInfo.cast.map((person:any, idx:number) => {
@@ -142,7 +149,7 @@ function Title() {
 
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        console.log('existing rating', user)
+        // console.log('existing rating', user)
         user.films.forEach((e:any) => {
             // console.log(filmId, e.film.id)
             if (e.id === filmId){
@@ -159,10 +166,10 @@ function Title() {
 
     const checkExistingWatchlist = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        console.log('existing', user)
+        // console.log('existing', user)
         user.films.forEach((e:any) => {
             if (e.id === filmId){
-                console.log("LOOK HERE", e)
+                // console.log("LOOK HERE", e)
                 if (e.watchlist){
 
                     setWatchlist(true)
