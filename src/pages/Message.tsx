@@ -15,7 +15,7 @@ function Message() {
     const [roomId, setRoomId] = useState(String)
     const [status, setStatus] = useState(false)
     const location = useLocation()
-    const socket:any = io(URLS.BASE_TEST, {autoConnect: false})
+    const socket:any = io(URLS.BASE_TEST, {autoConnect: true})
     
     // console.log('id1:', id1, 'id2:', id2)
 
@@ -44,7 +44,7 @@ function Message() {
                 socket.emit('online', { uid: currUserId, roomNum })
                 setConnected(true)
             })
-            socket.on('disconnect', () => {
+            socket.once('disconnect', () => {
                 console.log('disconnected from da socket D:')
                 socket.emit('offline', { uid: currUserId, roomNum })
                 setConnected(false)
@@ -53,18 +53,19 @@ function Message() {
                 console.log(msg)
             })
             socket.on('update status', (status:Array<String>) => {
-                if (user2 in status){
+                console.log("UPDATE STATUS!!", status)
+                if (Object.values(status).includes(user2)){
                     setStatus(true)
                 } else {
                     setStatus(false)
                 }
-                console.log("UPDATE STATUS!!", status)
             })
             return () => {
                 socket.off('connect')
                 socket.off('disconnect')
                 socket.off('message')
                 socket.off('update status')
+                socket.disconnect()
             }
         } else {
             console.log("YOU SHOULDN'T BE HERE BUD!")
@@ -90,7 +91,7 @@ function Message() {
             user1 = id2;
             user2 = id1
         }
-        getUserData(user2)
+        // getUserData(user2)
     }, [])
 
     
