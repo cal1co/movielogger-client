@@ -10,11 +10,11 @@ function NavLinks() {
         const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
         setName(user.name)
         setAvatar(user.avatar)
-        console.log(user.avatar)
+        // console.log(user.avatar)
     }, [name])
 
     const logout = () => {
-        console.log("LOGGING OUT", name)
+        // console.log("LOGGING OUT", name)
         localStorage.removeItem('currentUserToken')
         localStorage.removeItem('currentUserId')
         localStorage.removeItem('currentUserName')
