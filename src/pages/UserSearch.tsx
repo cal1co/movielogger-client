@@ -26,6 +26,10 @@ function UserSearch() {
         await axios.get(url + searchQuery)
             .then((res) => {
                 setLoading(false)
+                console.log(res.data)
+                res.data.forEach((e:any) => {
+                    console.log(JSON.parse(e.avatar).image)
+                })
                 setResults(res.data)
             })
             .catch((err) => {
@@ -40,7 +44,7 @@ function UserSearch() {
                     <div className="result-link-elem">
                         <div className="user-result-avi">
                             <svg className="user-result-profile-img" style={{backgroundColor: JSON.parse(user.avatar).color}} height='128px' width='128px'>
-                                <image className="user-result-profile-img" href={JSON.parse(user.avatar).image}></image> 
+                                <image className="user-result-profile-img" href={(JSON.parse(user.avatar).image === 'https://ssl.gstatic.com/docs/common/profile/undefined_lg.png') ? 'https://ssl.gstatic.com/docs/common/profile/orangutan_lg.png' : JSON.parse(user.avatar).image}></image> 
                             </svg>
                         </div>
                         <div className="user-result-username">

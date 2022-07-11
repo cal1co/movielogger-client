@@ -3,11 +3,11 @@ import { io } from 'socket.io-client'
 import { useEffect, useState } from 'react'
 import '../style/Message.css'
 
-const socket:any = io(URLS.BASE_TEST)
 
 function Message() {
     const [currSocket, setCurrSocket] = useState(Number)
     const [connected, setConnected] = useState(false)
+    const socket:any = io(URLS.BASE_TEST, { autoConnect: false })
     // socket.on('connect', () => {
     //     console.log('connected to da socket! :D')
     // })
@@ -19,8 +19,12 @@ function Message() {
     // }, [currSocket])
 
     useEffect(() => {
+        // socket.auth = 'calico' 
+        socket.connect()
         socket.on('connect', () => {
             console.log('connected to da socket :D')
+            const currUserId = localStorage.getItem('currentUserId')
+            socket.emit('set user', currUserId)
             setConnected(true)
         })
         socket.on('disconnect', () => {
@@ -30,8 +34,6 @@ function Message() {
         socket.on('chat message', (msg:any) => {
             console.log(msg)
         })
-    
-
         return () => {
             socket.off('connect')
             socket.off('disconnect')
@@ -39,7 +41,7 @@ function Message() {
         }
     })
 
-    const sendMsg = (ev:any) => {
+    const sendMsg = async (ev:any) => {
         ev.preventDefault()
         console.log('message sent!')
         const message = ev.target[0].value

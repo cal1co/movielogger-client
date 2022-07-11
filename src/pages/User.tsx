@@ -20,6 +20,7 @@ function User() {
     const [watchedSelect, setWatchedSelect] = useState(false)
     const [watchlistSelect, setWatchlistSelect] = useState(false)
     const [likedSelect, setLikedSelect] = useState(false)
+    const [dmLink, setDmLink] = useState('')
     const location = useLocation()
     
     // TODO: ADD A LITTLE LINE UNDER SELECTED // TURN PROFILE BIO INTO GRID TO BETTER PLACE ITEMS
@@ -67,6 +68,7 @@ function User() {
                 setFollowerCount(res.data.followers.length)
                 setFollowingCount(res.data.following.length)
                 checkFollow(res.data)
+                getMessageLink(res.data)
                 // console.log(avi)
             } else {
                 console.log("USER NOT SET")
@@ -171,6 +173,18 @@ function User() {
         }
     }
 
+    const getMessageLink = (user:any) => {
+        const currId = localStorage.getItem('currentUserId') || '{}'
+        let msgLink = 'hey'
+        if (user._id > currId){
+            msgLink = currId + '-' + user._id
+        } else {
+            msgLink = user._id + '-' + currId
+        }
+        console.log(msgLink)
+        setDmLink(msgLink)
+    }
+
 
     return (
         <div className="userPage">
@@ -210,6 +224,9 @@ function User() {
                                                         :
                                                         <button onClick={followUser}>follow</button>
                                                 }
+                                                <Link to={`/messages/${dmLink}`}>
+                                                    MESSAGE
+                                                </Link>
                                             </div>
                                         :
                                         <p></p>
