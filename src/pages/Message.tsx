@@ -109,17 +109,18 @@ function Message() {
 
     
     const getUserData = async (users:any) => {
-        await axios.get(`${URLS.BASE}/user/findId/${users.u1}`)
+        await axios.get(`${URLS.BASE}/user/find/id/${users.u1}`)
             .then((res) => {
-                // console.log('user two info', res.data)
+                console.log('user two info', res.data)
                 setUserTwoInfo(res.data)
             })
             .catch((err) => {
                 console.error(err)
             })
-            await axios.get(`${URLS.BASE}/user/findId/${users.u2}`)
+            await axios.get(`${URLS.BASE}/user/find/id/${users.u2}`)
             .then((res) => {
                 setTwoAvatar(JSON.parse(res.data.avatar))
+                console.log('user one info', res.data)
                 setUserOneInfo(res.data)
             })
             .catch((err) => {

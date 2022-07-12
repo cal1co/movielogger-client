@@ -145,15 +145,17 @@ function Title() {
 
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        // console.log('existing rating', user)
-        user.films.forEach((e:any) => {
-            // console.log(filmId, e.film.id)
-            if (e.id === filmId){
-                if (e.rating){
-                    setRating(e.rating)
+        console.log('existing rating', user)
+        if(user.films){
+            user.films.forEach((e:any) => {
+                // console.log(filmId, e.film.id)
+                if (e.id === filmId){
+                    if (e.rating){
+                        setRating(e.rating)
+                    }
                 }
-            }
-        })
+            })
+        }
     }
     const rateTitle = (newRating:any) => {
         setRating(newRating)
@@ -162,16 +164,19 @@ function Title() {
 
     const checkExistingWatchlist = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        // console.log('existing', user)
-        user.films.forEach((e:any) => {
-            if (e.id === filmId){
-                // console.log("LOOK HERE", e)
-                if (e.watchlist){
+        console.log('existing', user)
 
-                    setWatchlist(true)
+        if (user.films){
+            user.films.forEach((e:any) => {
+                if (e.id === filmId){
+                    // console.log("LOOK HERE", e)
+                    if (e.watchlist){
+    
+                        setWatchlist(true)
+                    }
                 }
-            }
-        })
+            })
+        }
     }
     const addToWatchlist = () => {
         if (watchlist){

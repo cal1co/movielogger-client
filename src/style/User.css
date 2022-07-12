@@ -20,11 +20,20 @@
     position:relative;
     /* right:30%; */
     /* top:10%; */
-    left:80%;
+    /* left:80%; */
     width:fit-content;
-    transform:translate(-50%,-125%);
+    /* transform:translate(-50%,-125%); */
+    display:flex;
 }
-.profile-utility > button{
+.follow-butts{
+    position:relative;
+    top:50%;
+    /* transform:translateY(-50%) */
+}
+.follow-butt{
+    position:relative;
+    top:50%;
+    transform:translateY(-50%);
     border:0.5px solid white;
     border-bottom:1.5px solid white;
     font-weight:bolder;
@@ -35,12 +44,12 @@
     padding-inline:1rem;
 
 }
-.profile-utility > button:hover{
+.follow-butt:hover{
     transition: all .1s ease-in;
     background-color:rgba(106, 90, 205, 1);
     cursor:pointer;
 }
-.profile-utility > button:active{
+.follow-butt:active{
     transition: none;
     transform:translateY(1px);
     border-bottom:0.5px solid white;
@@ -120,4 +129,25 @@
 }
 a {
     text-decoration:none;
+}
+
+.msg-box{
+    height:24px;
+    width:24px;
+    fill:white;
+    outline:0.5px solid white;
+    border-radius:3rem;
+    -moz-border-radius:3rem;
+    -webkit-border-radius:3rem;
+    padding:10px;
+    margin-right:1rem;
+    background-color:black
+}
+.msg-box:hover{
+    transition: all .1s ease-in;
+    background-color:#111111
+    /* background-color:slateblue */
+}
+.send-dm{
+    padding:10px;
 }
