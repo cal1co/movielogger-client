@@ -23,7 +23,7 @@ function Message() {
 
 
     const location = useLocation()
-    const socket:any = io(URLS.BASE_TEST, {autoConnect: true})
+    const socket:any = io(URLS.BASE, {autoConnect: true})
     
     // console.log('id1:', id1, 'id2:', id2)
 
@@ -109,7 +109,7 @@ function Message() {
 
     
     const getUserData = async (users:any) => {
-        await axios.get(`http://localhost:8888/user/find/${users.u1}`)
+        await axios.get(`${URLS.BASE}/user/findId/${users.u1}`)
             .then((res) => {
                 // console.log('user two info', res.data)
                 setUserTwoInfo(res.data)
@@ -117,7 +117,7 @@ function Message() {
             .catch((err) => {
                 console.error(err)
             })
-            await axios.get(`http://localhost:8888/user/find/${users.u2}`)
+            await axios.get(`${URLS.BASE}/user/findId/${users.u2}`)
             .then((res) => {
                 setTwoAvatar(JSON.parse(res.data.avatar))
                 setUserOneInfo(res.data)
@@ -127,7 +127,7 @@ function Message() {
             })
     }
     const getChatData = async (room:String) => {
-        await axios.get(`http://localhost:8888/room/find/${room}`)
+        await axios.get(`${URLS.BASE}/room/find/${room}`)
             .then((res) => {
                 setChatData(res.data)
                 console.log(res.data)
