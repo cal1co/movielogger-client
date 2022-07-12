@@ -7,6 +7,7 @@ import axios from 'axios'
 
 function Message() {
     const [currSocket, setCurrSocket] = useState(Number)
+    const [userId, setUserId] = useState(String)
     const [userOne, setUserOne] = useState(String)
     const [userTwo, setUserTwo] = useState(String)
     const [userOneInfo, setUserOneInfo] = useState(Object)
@@ -75,8 +76,9 @@ function Message() {
     }, [])
 
     useEffect(() => {
-        const currUserId = localStorage.getItem('currentUserId')
+        const currUserId = localStorage.getItem('currentUserId') || '{}'
         const roomNum = location.pathname.slice(10)
+        setUserId(currUserId)
         setRoomId(roomNum)
         const id1 = roomNum.slice(0, 24)
         const id2 = roomNum.slice(25, 49)
@@ -91,8 +93,8 @@ function Message() {
             user1 = id2;
             user2 = id1
         }
-        // getUserData(user2)
-    }, [])
+        getUserData(user2)
+    }, [setUserTwoInfo])
 
     
     const getUserData = async (user2:string) => {
@@ -113,7 +115,8 @@ function Message() {
         const message = ev.target[0].value
         socket.emit('message', {
             message,
-            roomId
+            roomId,
+            userId
         })
         ev.target[0].value = ''
     }
