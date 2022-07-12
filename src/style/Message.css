@@ -1,3 +1,64 @@
 .messages{
-    height:60vh;
+    height:fit-content;
+}
+
+.chat-box{
+    height:85vh;
+    overflow:scroll;
+    background:#111111;
+}
+.msg-header{
+    background-color:#111111;
+    border-top:0.25px solid gray;
+    height:3em;
+    box-shadow:#00000013 0 5px 10px;
+    width:100vw;
+    position:fixed;
+    display:inline-flex;
+    align-items:center;
+    gap:0.5em;
+    overflow:hidden;
+}
+.msg-username{
+    height:fit-content;
+    font-weight:bold;
+}
+.msg-submit{
+    border-top:0.25px solid gray;
+    background:#111111;
+    height:5em;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%)
+}
+.message{
+    overflow:hidden
+}
+.msg-input{
+    position:relative;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    background-color:#3a3b3c;
+    border:none;
+    border-radius:10em;
+    height:2em;
+    color:white;
+    direction: ltr;
+}
+.msg-input::placeholder{
+    color:#9a9ca0;
+}
+.msg-input:focus{
+    transition: all 1.5s ease-in;
+    width:35vw;
+    outline:none;
+}
+.message-item{
+    padding-inline:2.5em;
+    padding-top:0.5em;
+}
+
+.msg-blankspace{
+    height:100vh;
 }

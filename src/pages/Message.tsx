@@ -1,6 +1,7 @@
+import React from 'react'
 import URLS from '../api/server'
 import { io } from 'socket.io-client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import '../style/Message.css'
 import axios from 'axios'
@@ -15,6 +16,12 @@ function Message() {
     const [connected, setConnected] = useState(false)
     const [roomId, setRoomId] = useState(String)
     const [status, setStatus] = useState(false)
+    const [chatData, setChatData] = useState(Object)
+    const [twoAvatar, setTwoAvatar] = useState(Object)
+    const [loaded, setLoaded] = useState(false)
+    const currUserId = localStorage.getItem('currentUserId') || '{}'
+
+
     const location = useLocation()
     const socket:any = io(URLS.BASE_TEST, {autoConnect: true})
     
@@ -22,7 +29,6 @@ function Message() {
 
     useEffect(() => {
         // socket.auth = 'calico' 
-        const currUserId = localStorage.getItem('currentUserId')
         const roomNum = location.pathname.slice(10)
         setRoomId(roomNum)
         const id1 = roomNum.slice(0, 24)
@@ -50,7 +56,8 @@ function Message() {
                 setConnected(false)
             })
             socket.on('message', (msg:any) => {
-                console.log(msg)
+                // console.log(msg)
+                appendMessage(msg)
             })
             socket.on('update status', (status:Array<String>) => {
                 console.log("UPDATE STATUS!!", status)
@@ -76,9 +83,8 @@ function Message() {
     }, [])
 
     useEffect(() => {
-        const currUserId = localStorage.getItem('currentUserId') || '{}'
-        const roomNum = location.pathname.slice(10)
         setUserId(currUserId)
+        const roomNum = location.pathname.slice(10)
         setRoomId(roomNum)
         const id1 = roomNum.slice(0, 24)
         const id2 = roomNum.slice(25, 49)
@@ -93,25 +99,48 @@ function Message() {
             user1 = id2;
             user2 = id1
         }
-        getUserData(user2)
+        const users = { 
+            u1: user1,
+            u2: user2
+        }
+        getUserData(users)
+        getChatData(roomNum)
     }, [setUserTwoInfo])
 
     
-    const getUserData = async (user2:string) => {
-        await axios.get(`http://localhost:8888/user/find/${user2}`)
-        .then((res) => {
-            // console.log(res.data)
-            setUserTwoInfo(res.data)
-        })
-        .catch((err) => {
-            console.error(err)
-        })
-        // getUserData(user2)
+    const getUserData = async (users:any) => {
+        await axios.get(`http://localhost:8888/user/find/${users.u1}`)
+            .then((res) => {
+                // console.log('user two info', res.data)
+                setUserTwoInfo(res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+            await axios.get(`http://localhost:8888/user/find/${users.u2}`)
+            .then((res) => {
+                setTwoAvatar(JSON.parse(res.data.avatar))
+                setUserOneInfo(res.data)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
+    }
+    const getChatData = async (room:String) => {
+        await axios.get(`http://localhost:8888/room/find/${room}`)
+            .then((res) => {
+                setChatData(res.data)
+                console.log(res.data)
+                setLoaded(true)
+            })
+            .catch((err) => {
+                console.error(err)
+            })
     }
 
     const sendMsg = async (ev:any) => {
         ev.preventDefault()
-        console.log('message sent!')
+        // console.log('message sent!')
         const message = ev.target[0].value
         socket.emit('message', {
             message,
@@ -121,18 +150,70 @@ function Message() {
         ev.target[0].value = ''
     }
 
+    const messagesEndRef:any = useRef(null)
+
+    const scrollToBottom = () => {
+        // messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+        messagesEndRef.current?.scrollIntoView()
+      }
+
+    useEffect(scrollToBottom, [chatData])
+
+
+    const renderChat = (data:any) => {
+        return data?.messages.map((msg:any,idx:string) => {
+            return <div className="message-item" id={idx} style={{textAlign: (msg.userId === currUserId) ? 'right' : 'left'}}>
+                {msg.message} 
+                <div ref={messagesEndRef} />
+            </div>
+        })
+    }
+    const appendMessage = (msg:any) => {
+        // console.log("APPENDING MESSAGE: ", msg.message)
+        const parent = document.getElementsByClassName("chat-box")
+        // console.log(parent[0])
+        // const msgNode:any = React.createElement("div", {className: "message-item"}, msg)
+        const msgNode:any = document.createElement("div")
+        msgNode.innerHTML = msg.message
+        msgNode.classList.add("message-item")
+        console.log(msg.userId, currUserId)
+        // console.log(msgNode)
+        if (msg.userId === currUserId){
+            msgNode.style.textAlign = 'right'
+        } else {
+            msgNode.style.textAlign = 'left'
+        }
+        const latestMsg = parent[0].appendChild(msgNode)
+        latestMsg.scrollIntoView({behavior: "smooth"})
+    }
     
     return (
         <div className="message">
-            <div className="messages">
-                message {userTwoInfo.username} online: {status ? 'on' : 'off'}
+                {
+                    loaded
+                    ?
+                    <div className="messages">
+                        <div className="msg-header">
+                            <svg className="nav-img" style={{backgroundColor: twoAvatar.color}} height='128px' width='128px'>
+                                <image className="nav-img" href={twoAvatar.image}></image> 
+                            </svg>
+                            <div className="msg-util-info">
 
+                            <div className="msg-username">@{userOneInfo.username}</div> {status ? 'online' : 'offline'}
+                            </div>
+                        </div>
+                        <div className="chat-box">
+                        <div className="msg-blankspace"></div>
+                            {renderChat(chatData)}
+                        </div>
+                    </div>
+                    :
+                    <p>loading chat...</p>
+                }
+            <form onSubmit={sendMsg} className="msg-submit">
+                <input placeholder="Aa" type="text" className="msg-input"></input>
 
-            </div>
-            <form onSubmit={sendMsg}>
-                <input placeholder="write a message" type="text"></input>
-
-            <button>Send</button>
+            {/* <button>Send</button> */}
             </form>
         </div>
     )
