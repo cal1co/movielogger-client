@@ -46,7 +46,6 @@ function Message() {
             })
             socket.once('disconnect', () => {
                 console.log('disconnected from da socket D:')
-                socket.emit('offline', { uid: currUserId, roomNum })
                 setConnected(false)
             })
             socket.on('message', (msg:any) => {
@@ -65,6 +64,7 @@ function Message() {
                 socket.off('disconnect')
                 socket.off('message')
                 socket.off('update status')
+                socket.emit('offline', { uid: currUserId, roomNum })
                 socket.disconnect()
             }
         } else {
