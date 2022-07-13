@@ -1,6 +1,7 @@
 # MOVIELOGGER - A movie-centric social media service
 
 ## Current live link: [my-movies-client.netlify.app](https://my-movies-client.netlify.app)
+## Server link: [movielogger-server](https://github.com/cal1co/movielogger-server)
 
 # About this project:
 - This project is a social network service that focuses on building community around film, television, actors, and more. 
