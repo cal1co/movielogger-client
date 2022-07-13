@@ -123,7 +123,17 @@
 
 .user-result-element{
     display:grid;
-    width:fit-content;
+    width:80vw;
+    position:relative;
+    left:50%;
+    transform:translateX(-50%);
+    border:0.5px solid white;
+    margin-bottom:1rem;
+    border-radius:5em;
+    border-left:none;
+}
+.user-result-element:hover{
+    background-color:#0a0a0a;
 }
 .user-result-element > * {
     width:fit-content;
@@ -186,4 +196,12 @@ a {
 }
 .user-int-item:hover{
     background-color:rgba(0, 0, 0, 0.4)
+}
+.user-result-avi{
+    height:80px;
+}
+.user-result-block{
+    background-color:#111111;
+    margin-bottom:5vh;
+    height:fit-content;
 }

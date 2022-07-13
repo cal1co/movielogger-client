@@ -158,8 +158,34 @@ polygon{
 }
 
 .cast-img{
+    scroll-snap-align:start;
     object-fit:cover;
     border-radius:50%;
     height:120px;
     width:120px;;
+}
+
+.cast-group{
+    /* scrollbar-width:none; */
+    scroll-behavior:smooth;
+    overflow:scroll;
+    display: grid;
+    grid-auto-flow: column;
+    gap: 1rem;
+    scroll-snap-type: x proximity;
+}
+.cast-item-wrapper{
+    width:fit-content;
+}
+
+.cast-name{
+    font-weight:bold;
+    font-size:110%
+}
+.cast-character{
+    font-size:85%;
+}
+.cast-text{
+    text-align:center;
+    margin-bottom:0.25rem;
 }

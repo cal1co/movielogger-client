@@ -69,7 +69,7 @@ function UserSearch() {
                 ?
                 <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                 :
-                <div className="result-block">
+                <div className="user-result-block">
                     {
                         renderResults(results)
                     }

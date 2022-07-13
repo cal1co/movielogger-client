@@ -111,23 +111,28 @@ function Title() {
         }
     }
     const renderCastInfo = () => {
-        // console.log(castInfo)
+        console.log(castInfo)
         if (castInfo !== undefined){
             // return <div className="hi">hi</div>
             return castInfo.cast.map((person:any, idx:number) => {
-                return <div className="">
-                    {
-                    idx < 5 
-                    ? 
-                    
-                    <div className="cast-img-wrapper" id={`${idx}`}>
-                    <img className="cast-img" src={URLS.POSTER + person.profile_path}/> 
+                if (idx < 20){
+                    return <div className="cast-item-wrapper">                    
+                        <div className="cast-img-wrapper" id={`${idx}`}>
+                            {person.profile_path === null
+                            ?
+                            <div className="cast-img">image unavailable</div>
+                            :
+                            <img className="cast-img" src={URLS.POSTER + person.profile_path}/> 
+                            }
+                        </div>
+                        <div className="cast-name cast-text">
+                            {person.name}
+                        </div>
+                        <div className="cast-character cast-text">
+                            {person.character}
+                        </div>
                     </div>
-                    : 
-                    <p></p>
-                    }
-                    
-                </div>
+                }
             })
             }
     }
@@ -313,8 +318,11 @@ function Title() {
 
                     </div>
 
-                    <div className="misc-info">
-                        {renderCastInfo()}
+                    <div className="misc-info" style={{display: backdropLoaded ? 'grid' : 'none'}}>
+                        CAST:
+                        <div className="cast-group">
+                            {renderCastInfo()}
+                        </div>
                     </div>
                 </div>
                 // renderTitle

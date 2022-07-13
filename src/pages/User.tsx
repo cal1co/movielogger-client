@@ -11,6 +11,7 @@ const header = {"Access-Control-Allow-Origin": "*"}
 function User() {
     const [user, setUser] = useState(Object)
     const [userRatings, setRatings] = useState(Array)
+    const [userWatchlist, setUserWatchlist] = useState(Array)
     const [userLoaded, setUserLoaded] = useState(false)
     const [currUserLoggedIn, setCurrUserLoggedIn] = useState(false)
     const [currUser, setCurrUser] = useState(Object)
@@ -67,6 +68,19 @@ function User() {
                     ratedTitles.push(tempObj)
                 })
                 setRatings(ratedTitles)
+                const watchlistTitles:any = []
+                res.data.films.forEach((e:any) => {
+                    if (e.watchlist === true){
+                        const tempObj = {
+                            id: e.id,
+                            poster: e.poster,
+                            watchlist: e.watchlist,
+                            title: e.title
+                        }
+                        watchlistTitles.push(tempObj)
+                    }
+                })
+                setUserWatchlist(watchlistTitles)
                 setFollowerCount(res.data.followers.length)
                 setFollowingCount(res.data.following.length)
                 checkFollow(res.data)
@@ -153,7 +167,24 @@ function User() {
     }
 
     const renderWatchlist = () => {
-        console.log()
+        console.log(userWatchlist)
+        if (userWatchlist.length < 1){
+            // console.log("This user has no ratings")
+            return <div>This user has nothing in their watchlist</div>
+        } else {
+            return userWatchlist.map((elem:any, idx:number) => {
+                return <div className="rating-item user-int-item" id={`${idx}`}>
+                    <Link to={`/title/show?id=${elem.id}`}>
+                        <img src={MOVIE_URLS.POSTER + elem.poster} className="rated-film-poster"/> 
+                    </Link>
+                    <Link to={`/title/show?id=${elem.id}`}>
+                        {elem.title}
+                    </Link>
+    
+                </div>
+            })
+
+        }
     }
 
     const selectSection = (tab:number) => {
@@ -287,7 +318,7 @@ function User() {
                         0 titles watched:
                         </div>
                         <div className="user-watchlist" style={{display: watchlistSelect ? 'contents' : 'none'}}>
-                        0 watchlist items :
+                        {userWatchlist.length} watchlist items: {renderWatchlist()}
                         </div>
                         <div className="user-liked" style={{display: likedSelect ? 'contents' : 'none'}}>
                         0 items liked:
