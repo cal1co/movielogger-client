@@ -7,7 +7,9 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 
 import Signup from '../src/pages/Signup'
 import URLS from '../src/api/movieApi'
-import puppeteer from 'puppeteer'
+
+
+const password = "chicken"
 
 describe("signup", () => {
 
@@ -16,5 +18,12 @@ describe("signup", () => {
         await expect(page).toMatch('')
     })
 
+    it("can signup with a new email address", async () => {
+        await expect(page).toFillForm('form[login-form]', {
+            username:'jest',
+            email:'jest@gmail.com',
+            password:password,
+        })
+    })
 
 })
