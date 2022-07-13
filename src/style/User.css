@@ -11,9 +11,6 @@
     font-size:1.5rem;
     font-weight:bolder;
     position:relative;
-    top:10%;
-    left:20%;
-    transform:translate(-50%, -50%);
     color:darkgray;
 }
 .profile-utility{
@@ -26,23 +23,22 @@
     display:flex;
 }
 .follow-butts{
-    position:relative;
-    top:50%;
-    /* transform:translateY(-50%) */
+
+}
+.follow-util{
+    display:inline-flex;
+    align-items:center;
 }
 .follow-butt{
-    position:relative;
-    top:50%;
-    transform:translateY(-50%);
     border:0.5px solid white;
-    border-bottom:1.5px solid white;
     font-weight:bolder;
     font-size:1.25rem;
     background:none;
     color:white;
     border-radius:1em;
     padding-inline:1rem;
-
+    height:fit-content;
+    padding-block: 0.5rem;
 }
 .follow-butt:hover{
     transition: all .1s ease-in;
@@ -50,8 +46,6 @@
     cursor:pointer;
 }
 .follow-butt:active{
-    transition: none;
-    transform:translateY(1px);
     border-bottom:0.5px solid white;
 }
 
@@ -66,17 +60,25 @@
     transform:translate(-50%);
     border-radius:0.25em 0.25em 0 0;
     background-color:#111111;
+    display:grid;
+    align-items:center;
+    justify-items:center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1.5fr 1fr;
+    grid-template-areas:
+    "name follow"
+    "bio bio"
+    "following nothing"
+    /* grid-auto-columns:100%; */
 }
-
+.profile-username{ grid-area:name; }
+.profile-utility{ grid-area: follow; }
+.profile-follow-info{ grid-area: following; }
 .profile-follow-info{
     display:inline-flex;
     height:20px;
     width:auto;
     gap:2rem;
-    position:relative;
-    left:20%;
-    transform:translate(-50%, -50%);
-    top:75%;
 }
 
 .follow{
@@ -144,6 +146,8 @@ a {
     background-color:black
 }
 .msg-box:hover{
+    fill:slateblue;
+    outline: 0.5px solid slateblue;
     transition: all .1s ease-in;
     background-color:#111111
     /* background-color:slateblue */
