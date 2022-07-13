@@ -111,7 +111,7 @@ function Title() {
         }
     }
     const renderCastInfo = () => {
-        console.log(castInfo)
+        // console.log(castInfo)
         if (castInfo !== undefined){
             // return <div className="hi">hi</div>
             return castInfo.cast.map((person:any, idx:number) => {
@@ -150,7 +150,7 @@ function Title() {
 
     const checkExistingRating = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        console.log('existing rating', user)
+        // console.log('existing rating', user)
         if(user.films){
             user.films.forEach((e:any) => {
                 // console.log(filmId, e.film.id)
@@ -169,7 +169,7 @@ function Title() {
 
     const checkExistingWatchlist = () => {
         const user = JSON.parse(localStorage!.getItem('currentUser') || '{}')
-        console.log('existing', user)
+        // console.log('existing', user)
 
         if (user.films){
             user.films.forEach((e:any) => {
@@ -202,7 +202,7 @@ function Title() {
             const url = serverURLS.BASE + serverURLS.USER + 'film'
             const user = JSON.parse(localStorage.getItem('currentUser') || '{}')
             const filmObj = {user, rating: rateNum, filmInfo:{filmData}, liked, watched, watchlist:addWatchlist}
-            console.log("FILM OBJECT!!!!", filmObj)
+            // console.log("FILM OBJECT!!!!", filmObj)
             await axios.post(url, filmObj)
             .then((res) => {
                 localStorage.removeItem('currentUser')

@@ -8,7 +8,6 @@
     background:#111111e6;
     box-shadow: #00000013 0 5px 10px;
     overflow:none;
-    /* display:inline-block; */
 }
 .Nav > * {
     display:inline-block;
@@ -32,10 +31,12 @@
     color:white;
     font-weight:bolder;
     font-size:larger;
-    background: -webkit-linear-gradient(left, #dddd, slateblue);
+    background: -webkit-linear-gradient(left, rgb(135, 66, 253), slateblue);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     cursor:pointer;
+    font-weight:bolder;
+    font-family:inherit;
 }
 
 .nav-links{
