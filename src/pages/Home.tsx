@@ -110,16 +110,10 @@ function Home() {
     }
 
     return ( 
-        // TODO: REFACTOR CODE TO COUNT LOADING OF EACH IMAGE. ADD LOADING SPINNER TO EACH BLOCK AND ONLY SHOW WHEN ALL IMAGES ARE READY
-        // TODO: ADD A FADE IN EFFECT WHEN FINISHED LOADING
-        // TODO: LINK TO A PAGE WITH MORE INFO ABOUT THE MOVIE
-        // TODO: ALLOW USERS TO SEARCH FOR A FILM 
-        // TODO: GET STARTED ON USERS AND BACKEND.
         <div className="home">
             {
                 loading 
                 ? 
-                // <p>loading...(import loading animation)</p>
                 <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
                 :
                 <div className="home-results">

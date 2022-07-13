@@ -1,3 +1,4 @@
+import React from 'react'
 import '../style/Title.css'
 import { Link, useLocation } from 'react-router-dom'
 import { useState, useEffect } from 'react'
