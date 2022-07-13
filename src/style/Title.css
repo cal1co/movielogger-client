@@ -62,6 +62,8 @@
     position:relative;
     transition: all .1s ease-in;
     height:4vw;
+    min-height:2rem;
+    max-height:3rem;
     border-radius:0.25rem;
     top:0%;
 }

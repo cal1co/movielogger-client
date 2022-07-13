@@ -3,6 +3,8 @@ import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import '../style/User.css'
 import URLS from '../api/server'
+import MOVIE_URLS from '../api/movieApi'
+import StarRatings from 'react-star-ratings'
 
 const header = {"Access-Control-Allow-Origin": "*"}
 
@@ -135,15 +137,23 @@ function User() {
             return <div>This user has no ratings</div>
         } else {
             return userRatings.map((elem:any, idx:number) => {
-                return <div className="rating-item" id={`${idx}`}>
+                return <div className="rating-item user-int-item" id={`${idx}`}>
                     <Link to={`/title/show?id=${elem.id}`}>
-                        {elem.rating} {elem.title}
+                        <img src={MOVIE_URLS.POSTER + elem.poster} className="rated-film-poster"/> 
+                    </Link>
+                    <StarRatings rating={elem.rating} starEmptyColor="#111111" starHoverColor="orange" starRatedColor="orange" starDimension="2.5em" starSpacing="0" svgIconViewBox="0 0 24 24"svgIconPath="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z" />
+                    <Link to={`/title/show?id=${elem.id}`}>
+                        {elem.title}
                     </Link>
     
                 </div>
             })
 
         }
+    }
+
+    const renderWatchlist = () => {
+        console.log()
     }
 
     const selectSection = (tab:number) => {
@@ -274,13 +284,13 @@ function User() {
                         {userRatings.length} Ratings: {renderRatings()}
                         </div>
                         <div className="user-watched" style={{display: watchedSelect ? 'contents' : 'none'}}>
-                            watched
+                        0 titles watched:
                         </div>
                         <div className="user-watchlist" style={{display: watchlistSelect ? 'contents' : 'none'}}>
-                            watchlist
+                        0 watchlist items :
                         </div>
                         <div className="user-liked" style={{display: likedSelect ? 'contents' : 'none'}}>
-                            liked
+                        0 items liked:
                         </div>
                     </div>
                 </div>
