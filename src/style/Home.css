@@ -79,7 +79,7 @@ body{
 .res-img:hover {
     cursor:pointer;
     /* filter:blur(0.05rem); */
-    filter:brightness(0.95)
+    filter:brightness(0.8)
 }
 .res-img:active {
     cursor:grab;

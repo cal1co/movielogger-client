@@ -49,7 +49,6 @@ function searchResults(){
                     </Link>
                         
                     <p className="overview">{movie.overview}</p>
-                    <button>+ Watch list</button>
                 </div>
             </div>
         })

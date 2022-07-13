@@ -77,7 +77,6 @@ function Home() {
                     <Link to={`/title/show?id=${movie.id}`} state={{movieInfo: movie}}>
                     <p className="film-title">{movie.original_title}</p>
                     </Link>
-                    <button>+ Watch list</button>
                 </div>
             </li>
             </div>
